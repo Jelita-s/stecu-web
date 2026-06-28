@@ -1,4 +1,5 @@
 // ===== PRODUCT DATA =====
+
 const PRODUCTS = [
   {
     id: 1,
