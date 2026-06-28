@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recommended — Finally Found You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .rec-hero { background: linear-gradient(135deg, #1e0438 0%, #3b0764 60%, #5b21b6 100%); padding: 56px 32px 48px; text-align: center; color: #fff; }
+    .rec-hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    .rec-hero p { color: rgba(255,255,255,.7); }
+    .skin-quiz { max-width: 680px; margin: 40px auto; background: #fff; border-radius: 18px; padding: 36px 32px; box-shadow: 0 6px 28px rgba(91,33,182,.13); border: 1px solid #ede9fe; }
+    .skin-quiz h2 { color: #3b0764; font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; }
+    .quiz-q { margin-bottom: 20px; }
+    .quiz-q label { display: block; font-size: .85rem; font-weight: 700; color: #5b21b6; margin-bottom: 8px; }
+    .quiz-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+    .quiz-opts input { display: none; }
+    .quiz-opts label { padding: 7px 16px; border: 1.5px solid #e9d5ff; border-radius: 20px; font-size: .82rem; font-weight: 600; cursor: pointer; color: #5b21b6; background: #f5f0ff; transition: all .2s; }
+    .quiz-opts input:checked + label { background: #5b21b6; color: #fff; border-color: #5b21b6; }
+    .btn-quiz { width: 100%; padding: 12px; background: #3b0764; color: #fff; border: none; border-radius: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: .95rem; cursor: pointer; transition: background .2s; margin-top: 8px; }
+    .btn-quiz:hover { background: #7c3aed; }
+    .rec-result { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; display: none; }
+    .rec-result h2 { color: #3b0764; font-size: 1.3rem; font-weight: 700; margin-bottom: 20px; }
+    .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  </style>
+</head>
+<body>
+<header class="header">
+  <div class="logo">Finally Found You.</div>
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-icon">☰</label>
+  <nav class="nav">
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="catalog.html">Produk</a></li>
+      <li><a href="req.html" class="active">Recommended</a></li>
+      <li><a href="review.html">Review</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="rec-hero">
+  <h1>Rekomendasi Produk 💜</h1>
+  <p>Jawab beberapa pertanyaan, kami carikan produk yang cocok untukmu!</p>
+</div>
+
+<div class="skin-quiz">
+  <h2>🔎 Quiz Kulit Cepat</h2>
+
+  <div class="quiz-q">
+    <label>1. Apa jenis kulitmu?</label>
+    <div class="quiz-opts">
+      <input type="radio" name="q1" id="q1a" value="normal"><label for="q1a">Normal</label>
+      <input type="radio" name="q1" id="q1b" value="kering"><label for="q1b">Kering</label>
+      <input type="radio" name="q1" id="q1c" value="berminyak"><label for="q1c">Berminyak</label>
+      <input type="radio" name="q1" id="q1d" value="kombinasi"><label for="q1d">Kombinasi</label>
+      <input type="radio" name="q1" id="q1e" value="sensitif"><label for="q1e">Sensitif</label>
+    </div>
+  </div>
+
+  <div class="quiz-q">
+    <label>2. Apa masalah kulitmu yang paling utama?</label>
+    <div class="quiz-opts">
+      <input type="radio" name="q2" id="q2a" value="jerawat"><label for="q2a">Jerawat</label>
+      <input type="radio" name="q2" id="q2b" value="kusam"><label for="q2b">Kusam / Kurang Cerah</label>
+      <input type="radio" name="q2" id="q2c" value="kering"><label for="q2c">Kulit Kering</label>
+      <input type="radio" name="q2" id="q2d" value="pori"><label for="q2d">Pori-pori Besar</label>
+      <input type="radio" name="q2" id="q2e" value="noda"><label for="q2e">Noda & Hiperpigmentasi</label>
+      <input type="radio" name="q2" id="q2f" value="penuaan"><label for="q2f">Tanda Penuaan</label>
+    </div>
+  </div>
+
+  <div class="quiz-q">
+    <label>3. Produk apa yang sedang kamu cari?</label>
+    <div class="quiz-opts">
+      <input type="radio" name="q3" id="q3a" value="serum"><label for="q3a">Serum</label>
+      <input type="radio" name="q3" id="q3b" value="moisturizer"><label for="q3b">Moisturizer</label>
+      <input type="radio" name="q3" id="q3c" value="cleanser"><label for="q3c">Cleanser</label>
+      <input type="radio" name="q3" id="q3d" value="sunscreen"><label for="q3d">Sunscreen</label>
+      <input type="radio" name="q3" id="q3e" value="toner"><label for="q3e">Toner</label>
+      <input type="radio" name="q3" id="q3f" value="body"><label for="q3f">Body Care</label>
+    </div>
+  </div>
+
+  <button class="btn-quiz" id="btnQuiz">Lihat Rekomendasi ✨</button>
+  <p id="quizErr" style="color:#dc2626;font-size:.82rem;margin-top:10px;display:none">Mohon jawab semua pertanyaan terlebih dahulu.</p>
+</div>
+
+<div class="rec-result" id="recResult">
+  <h2 id="recTitle"></h2>
+  <div class="rec-grid" id="recGrid"></div>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand"><h2>Finally Found You.</h2><p>Sahabat terbaik untuk perjalanan kulit sehatmu.</p></div>
+    <div class="footer-col"><h3>Jelajahi</h3><ul><li><a href="index.html">Beranda</a></li><li><a href="catalog.html">Produk</a></li><li><a href="about.html">Tentang Kami</a></li><li><a href="contact.html">Kontak</a></li></ul></div>
+    <div class="footer-col"><h3>Bantuan</h3><ul><li><a href="#">FAQ</a></li><li><a href="#">Pengiriman</a></li><li><a href="#">Kebijakan Pengembalian</a></li><li><a href="#">Syarat & Ketentuan</a></li></ul></div>
+  </div>
+  <hr>
+  <div class="footer-bottom">© 2026 Finally Found You. All rights reserved.</div>
+</footer>
+
+<script src="js/data.js"></script>
+<script>
+  document.getElementById('btnQuiz').addEventListener('click', () => {
+    const q1 = document.querySelector('input[name="q1"]:checked');
+    const q2 = document.querySelector('input[name="q2"]:checked');
+    const q3 = document.querySelector('input[name="q3"]:checked');
+    const err = document.getElementById('quizErr');
+
+    if (!q1 || !q2 || !q3) { err.style.display = 'block'; return; }
+    err.style.display = 'none';
+
+    const masalah  = q2.value;
+    const kategori = q3.value;
+
+    // Keyword map for desc matching
+    const keywords = {
+      jerawat:  ['jerawat','acne','salicylic','bha','zinc'],
+      kusam:    ['cerah','brightening','glow','kusam','vitamin c'],
+      kering:   ['kering','hyaluronic','ceramide','kelembap','panthenol'],
+      pori:     ['pori','blackhead','komedo','aha'],
+      noda:     ['noda','hiperpigmentasi','dark spot','kojic','arbutin','tranexamic'],
+      penuaan:  ['retinal','peptide','collagen','penuaan','kerutan']
+    };
+
+    const kw = keywords[masalah] || [];
+
+    let results = PRODUCTS.filter(p => {
+      const matchKat  = kategori === 'all' || p.category === kategori;
+      const descLower = p.desc.toLowerCase() + ' ' + p.name.toLowerCase();
+      const matchProb = kw.some(k => descLower.includes(k));
+      return matchKat && matchProb;
+    });
+
+    // fallback: just show category
+    if (results.length === 0) {
+      results = PRODUCTS.filter(p => p.category === kategori).slice(0, 4);
+    }
+
+    results = results.slice(0, 6);
+
+    const recResult = document.getElementById('recResult');
+    document.getElementById('recTitle').textContent =
+      `💜 ${results.length} Produk Rekomendasi untuk Kulitmu`;
+
+    document.getElementById('recGrid').innerHTML = results.map(p => `
+      <div class="product-card">
+        <div class="img-placeholder">${p.name}</div>
+        <div class="product-info">
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <span class="price">Rp ${p.price.toLocaleString('id-ID')}</span>
+          <a href="${p.link}" target="_blank" class="btn-buy">Beli Sekarang</a>
+        </div>
+      </div>
+    `).join('');
+
+    recResult.style.display = 'block';
+    recResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
+</body>
+</html>

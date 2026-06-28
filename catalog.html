@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog Produk — Finally Found You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Catalog-specific styles ── */
+    .catalog-hero {
+      background: linear-gradient(135deg, #1e0438 0%, #3b0764 60%, #5b21b6 100%);
+      padding: 56px 32px 48px;
+      text-align: center;
+      color: #fff;
+    }
+    .catalog-hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    .catalog-hero p  { color: rgba(255,255,255,.7); font-size: .95rem; }
+
+    /* search + filter bar */
+    .toolbar {
+      max-width: 1200px;
+      margin: -28px auto 0;
+      padding: 0 24px;
+      position: relative;
+      z-index: 10;
+    }
+    .toolbar-inner {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(91,33,182,.18);
+      padding: 20px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+    .search-wrap {
+      flex: 1 1 260px;
+      position: relative;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: 11px 16px 11px 42px;
+      border: 1.5px solid #e9d5ff;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: .9rem;
+      color: #3b0764;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .search-wrap input:focus { border-color: #7c3aed; }
+    .search-wrap .icon {
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: #a78bfa; font-size: 1.05rem;
+    }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .filter-btn {
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1.5px solid #e9d5ff;
+      background: #f5f0ff;
+      color: #5b21b6;
+      font-family: 'Poppins', sans-serif;
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: #5b21b6;
+      border-color: #5b21b6;
+      color: #fff;
+    }
+    .sort-select {
+      padding: 9px 14px;
+      border: 1.5px solid #e9d5ff;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: .85rem;
+      color: #3b0764;
+      outline: none;
+      cursor: pointer;
+    }
+    .result-info {
+      max-width: 1200px;
+      margin: 18px auto 4px;
+      padding: 0 24px;
+      font-size: .85rem;
+      color: #6d28d9;
+      font-weight: 600;
+    }
+    .no-result {
+      text-align: center;
+      padding: 60px 20px;
+      color: #9ca3af;
+    }
+    .no-result span { font-size: 2.5rem; display: block; margin-bottom: 12px; }
+    .no-result p { font-size: .95rem; }
+
+    /* product grid tweaks */
+    #product-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 22px;
+    }
+    .product-card { cursor: default; }
+    .category-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: .72rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: capitalize;
+    }
+    .tag-serum      { background:#ede9fe; color:#5b21b6; }
+    .tag-moisturizer{ background:#fce7f3; color:#9d174d; }
+    .tag-cleanser   { background:#d1fae5; color:#065f46; }
+    .tag-toner      { background:#dbeafe; color:#1e40af; }
+    .tag-sunscreen  { background:#fef3c7; color:#92400e; }
+    .tag-mask       { background:#ffe4e6; color:#be123c; }
+    .tag-body       { background:#f0fdf4; color:#166534; }
+    .tag-lip        { background:#fff1f2; color:#e11d48; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">Finally Found You.</div>
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-icon">☰</label>
+  <nav class="nav">
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="catalog.html" class="active">Produk</a></li>
+      <li><a href="req.html">Recommended</a></li>
+      <li><a href="review.html">Review</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="catalog-hero">
+  <h1>Katalog Produk Kami ✨</h1>
+  <p>Temukan skincare yang tepat untuk kulitmu dari koleksi Finally Found You</p>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="search-wrap">
+      <span class="icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Cari produk, bahan aktif, manfaat…" autocomplete="off">
+    </div>
+    <div class="filter-row">
+      <span style="font-size:.8rem;color:#6b7280;font-weight:600">Filter:</span>
+      <button class="filter-btn active" data-cat="all">Semua</button>
+      <button class="filter-btn" data-cat="serum">Serum</button>
+      <button class="filter-btn" data-cat="moisturizer">Moisturizer</button>
+      <button class="filter-btn" data-cat="cleanser">Cleanser</button>
+      <button class="filter-btn" data-cat="toner">Toner</button>
+      <button class="filter-btn" data-cat="sunscreen">Sunscreen</button>
+      <button class="filter-btn" data-cat="mask">Mask</button>
+      <button class="filter-btn" data-cat="body">Body</button>
+      <button class="filter-btn" data-cat="lip">Lip</button>
+    </div>
+    <select class="sort-select" id="sortSelect">
+      <option value="default">Urutan Default</option>
+      <option value="price-asc">Harga: Terendah</option>
+      <option value="price-desc">Harga: Tertinggi</option>
+      <option value="name-asc">Nama A–Z</option>
+    </select>
+  </div>
+</div>
+
+<p class="result-info" id="resultInfo"></p>
+
+<!-- PRODUCT GRID -->
+<div id="product-grid"></div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h2>Finally Found You.</h2>
+      <p>Sahabat terbaik untuk perjalanan kulit sehatmu.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Jelajahi</h3>
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="catalog.html">Produk</a></li>
+        <li><a href="about.html">Tentang Kami</a></li>
+        <li><a href="contact.html">Kontak</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Bantuan</h3>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Pengiriman</a></li>
+        <li><a href="#">Kebijakan Pengembalian</a></li>
+        <li><a href="#">Syarat & Ketentuan</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <div class="footer-bottom">© 2026 Finally Found You. All rights reserved.</div>
+</footer>
+
+<script src="js/data.js"></script>
+<script>
+  const grid        = document.getElementById('product-grid');
+  const searchInput = document.getElementById('searchInput');
+  const sortSelect  = document.getElementById('sortSelect');
+  const resultInfo  = document.getElementById('resultInfo');
+  const filterBtns  = document.querySelectorAll('.filter-btn');
+
+  let activeCategory = 'all';
+  let searchQuery    = '';
+  let sortOrder      = 'default';
+
+  function formatPrice(n) {
+    return 'Rp ' + n.toLocaleString('id-ID');
+  }
+
+  function renderProducts() {
+    let list = [...PRODUCTS];
+
+    // filter by category
+    if (activeCategory !== 'all') {
+      list = list.filter(p => p.category === activeCategory);
+    }
+
+    // filter by search
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      list = list.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.desc.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q)
+      );
+    }
+
+    // sort
+    if (sortOrder === 'price-asc')  list.sort((a,b) => a.price - b.price);
+    if (sortOrder === 'price-desc') list.sort((a,b) => b.price - a.price);
+    if (sortOrder === 'name-asc')   list.sort((a,b) => a.name.localeCompare(b.name));
+
+    // result info
+    resultInfo.textContent = `Menampilkan ${list.length} dari ${PRODUCTS.length} produk`;
+
+    // render
+    if (list.length === 0) {
+      grid.innerHTML = `
+        <div class="no-result" style="grid-column:1/-1">
+          <span>🔍</span>
+          <p>Produk "<strong>${searchQuery || activeCategory}</strong>" tidak ditemukan.</p>
+          <p style="margin-top:6px;font-size:.85rem">Coba kata kunci lain atau ubah filter.</p>
+        </div>`;
+      return;
+    }
+
+    grid.innerHTML = list.map(p => `
+      <div class="product-card">
+        <div class="img-placeholder">${p.name}</div>
+        <div class="product-info">
+          <span class="category-tag tag-${p.category}">${p.category}</span>
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <span class="price">${formatPrice(p.price)}</span>
+          <a href="${p.link}" target="_blank" class="btn-buy">Beli Sekarang</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Event listeners
+  searchInput.addEventListener('input', () => {
+    searchQuery = searchInput.value;
+    renderProducts();
+  });
+
+  sortSelect.addEventListener('change', () => {
+    sortOrder = sortSelect.value;
+    renderProducts();
+  });
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCategory = btn.dataset.cat;
+      renderProducts();
+    });
+  });
+
+  // Initial render
+  renderProducts();
+</script>
+</body>
+</html>

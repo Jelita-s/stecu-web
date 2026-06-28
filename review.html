@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Produk — Finally Found You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Review page styles ── */
+    .review-hero {
+      background: linear-gradient(135deg, #1e0438 0%, #3b0764 60%, #5b21b6 100%);
+      padding: 56px 32px 48px;
+      text-align: center;
+      color: #fff;
+    }
+    .review-hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    .review-hero p  { color: rgba(255,255,255,.7); }
+
+    .review-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px 60px;
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    /* ── FORM ── */
+    .form-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 32px 28px;
+      box-shadow: 0 6px 28px rgba(91,33,182,.13);
+      border: 1px solid #ede9fe;
+      position: sticky;
+      top: 90px;
+    }
+    .form-card h2 {
+      font-size: 1.2rem;
+      color: #3b0764;
+      font-weight: 700;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: .82rem;
+      font-weight: 700;
+      color: #5b21b6;
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #e9d5ff;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: .88rem;
+      color: #1e0438;
+      outline: none;
+      transition: border-color .2s;
+      background: #faf5ff;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: #7c3aed; background: #fff; }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    .star-group { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 4px; margin-top: 4px; }
+    .star-group input { display: none; }
+    .star-group label {
+      font-size: 1.6rem;
+      color: #d1d5db;
+      cursor: pointer;
+      transition: color .15s;
+      margin: 0;
+      padding: 0;
+      width: auto;
+    }
+    .star-group input:checked ~ label,
+    .star-group label:hover,
+    .star-group label:hover ~ label { color: #f59e0b; }
+
+    .error-msg {
+      display: none;
+      font-size: .76rem;
+      color: #dc2626;
+      margin-top: 4px;
+    }
+    .form-group.has-error input,
+    .form-group.has-error select,
+    .form-group.has-error textarea { border-color: #dc2626; }
+    .form-group.has-error .error-msg { display: block; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 12px;
+      background: #3b0764;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+      margin-top: 6px;
+    }
+    .btn-submit:hover { background: #7c3aed; transform: translateY(-2px); }
+
+    .toast {
+      display: none;
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #6ee7b7;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: .85rem;
+      margin-top: 14px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .toast.show { display: block; }
+
+    /* ── TABLE PANEL ── */
+    .table-panel h2 {
+      font-size: 1.2rem;
+      color: #3b0764;
+      font-weight: 700;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .badge-count {
+      background: #5b21b6;
+      color: #fff;
+      font-size: .78rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .table-search {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .table-search input {
+      flex: 1;
+      padding: 9px 14px;
+      border: 1.5px solid #e9d5ff;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: .85rem;
+      outline: none;
+    }
+    .table-search input:focus { border-color: #7c3aed; }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(91,33,182,.1);
+      border: 1px solid #ede9fe;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .85rem;
+      background: #fff;
+    }
+    thead { background: linear-gradient(135deg, #3b0764, #5b21b6); }
+    thead th {
+      padding: 13px 14px;
+      color: #fff;
+      font-weight: 700;
+      text-align: left;
+      white-space: nowrap;
+    }
+    tbody tr { transition: background .15s; }
+    tbody tr:nth-child(even) { background: #faf5ff; }
+    tbody tr:hover { background: #ede9fe; }
+    tbody td {
+      padding: 11px 14px;
+      color: #374151;
+      border-bottom: 1px solid #f3e8ff;
+      vertical-align: top;
+    }
+    .stars-display { color: #f59e0b; letter-spacing: 1px; }
+    .btn-del {
+      background: none;
+      border: 1.5px solid #fca5a5;
+      color: #dc2626;
+      border-radius: 8px;
+      padding: 5px 11px;
+      font-size: .78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-del:hover { background: #dc2626; color: #fff; border-color: #dc2626; }
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #9ca3af;
+    }
+    .empty-state span { font-size: 2rem; display: block; margin-bottom: 8px; }
+
+    @media (max-width: 900px) {
+      .review-layout { grid-template-columns: 1fr; }
+      .form-card { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">Finally Found You.</div>
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-icon">☰</label>
+  <nav class="nav">
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="catalog.html">Produk</a></li>
+      <li><a href="req.html">Recommended</a></li>
+      <li><a href="review.html" class="active">Review</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="review-hero">
+  <h1>Review Produk ⭐</h1>
+  <p>Bagikan pengalamanmu menggunakan produk Finally Found You!</p>
+</div>
+
+<div class="review-layout">
+
+  <!-- FORM -->
+  <div class="form-card">
+    <h2>✍️ Tulis Review</h2>
+
+    <div class="form-group" id="fg-name">
+      <label for="f-name">Nama Kamu *</label>
+      <input type="text" id="f-name" placeholder="contoh: Siti Rahayu" maxlength="60">
+      <span class="error-msg">Nama wajib diisi.</span>
+    </div>
+
+    <div class="form-group" id="fg-product">
+      <label for="f-product">Produk yang Direview *</label>
+      <select id="f-product">
+        <option value="">-- Pilih Produk --</option>
+      </select>
+      <span class="error-msg">Pilih produk terlebih dahulu.</span>
+    </div>
+
+    <div class="form-group" id="fg-skin">
+      <label for="f-skin">Jenis Kulit *</label>
+      <select id="f-skin">
+        <option value="">-- Pilih Jenis Kulit --</option>
+        <option value="Normal">Normal</option>
+        <option value="Kering">Kering</option>
+        <option value="Berminyak">Berminyak</option>
+        <option value="Kombinasi">Kombinasi</option>
+        <option value="Sensitif">Sensitif</option>
+      </select>
+      <span class="error-msg">Pilih jenis kulitmu.</span>
+    </div>
+
+    <div class="form-group" id="fg-rating">
+      <label>Rating *</label>
+      <div class="star-group" id="starGroup">
+        <input type="radio" name="rating" id="s5" value="5"><label for="s5" title="5">★</label>
+        <input type="radio" name="rating" id="s4" value="4"><label for="s4" title="4">★</label>
+        <input type="radio" name="rating" id="s3" value="3"><label for="s3" title="3">★</label>
+        <input type="radio" name="rating" id="s2" value="2"><label for="s2" title="2">★</label>
+        <input type="radio" name="rating" id="s1" value="1"><label for="s1" title="1">★</label>
+      </div>
+      <span class="error-msg">Pilih rating bintang.</span>
+    </div>
+
+    <div class="form-group" id="fg-review">
+      <label for="f-review">Ulasan *</label>
+      <textarea id="f-review" placeholder="Ceritakan pengalamanmu menggunakan produk ini…" maxlength="400"></textarea>
+      <span class="error-msg">Ulasan wajib diisi (min. 10 karakter).</span>
+    </div>
+
+    <button class="btn-submit" id="btnSubmit">Kirim Review ✨</button>
+    <div class="toast" id="toast">✅ Review berhasil ditambahkan!</div>
+  </div>
+
+  <!-- TABLE PANEL -->
+  <div class="table-panel">
+    <h2>
+      Semua Review
+      <span class="badge-count" id="reviewCount">0</span>
+    </h2>
+
+    <div class="table-search">
+      <input type="text" id="tableSearch" placeholder="🔍  Cari nama, produk, atau ulasan…">
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nama</th>
+            <th>Produk</th>
+            <th>Kulit</th>
+            <th>Rating</th>
+            <th>Ulasan</th>
+            <th>Tanggal</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="reviewTable">
+          <tr>
+            <td colspan="8">
+              <div class="empty-state">
+                <span>💬</span>
+                <p>Belum ada review. Jadilah yang pertama!</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h2>Finally Found You.</h2>
+      <p>Sahabat terbaik untuk perjalanan kulit sehatmu.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Jelajahi</h3>
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="catalog.html">Produk</a></li>
+        <li><a href="about.html">Tentang Kami</a></li>
+        <li><a href="contact.html">Kontak</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Bantuan</h3>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Pengiriman</a></li>
+        <li><a href="#">Kebijakan Pengembalian</a></li>
+        <li><a href="#">Syarat & Ketentuan</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <div class="footer-bottom">© 2026 Finally Found You. All rights reserved.</div>
+</footer>
+
+<script src="js/data.js"></script>
+<script>
+  // ── Populate product dropdown ──
+  const productSelect = document.getElementById('f-product');
+  PRODUCTS.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.name;
+    opt.textContent = p.name;
+    productSelect.appendChild(opt);
+  });
+
+  // ── State ──
+  let reviews = [];
+  let filterQ  = '';
+
+  // ── Helpers ──
+  function starsHTML(n) {
+    return '★'.repeat(n) + '☆'.repeat(5 - n);
+  }
+  function today() {
+    const d = new Date();
+    return d.toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
+  }
+
+  // ── Validation ──
+  function validate() {
+    let ok = true;
+
+    const name    = document.getElementById('f-name').value.trim();
+    const product = document.getElementById('f-product').value;
+    const skin    = document.getElementById('f-skin').value;
+    const rating  = document.querySelector('input[name="rating"]:checked');
+    const review  = document.getElementById('f-review').value.trim();
+
+    const setErr = (id, hasErr) => {
+      document.getElementById('fg-' + id).classList.toggle('has-error', hasErr);
+    };
+
+    setErr('name',    !name);                   if (!name)                   ok = false;
+    setErr('product', !product);                if (!product)                ok = false;
+    setErr('skin',    !skin);                   if (!skin)                   ok = false;
+    setErr('rating',  !rating);                 if (!rating)                 ok = false;
+    setErr('review',  review.length < 10);      if (review.length < 10)      ok = false;
+
+    return ok;
+  }
+
+  // ── Render table ──
+  function renderTable() {
+    const tbody = document.getElementById('reviewTable');
+    const q     = filterQ.toLowerCase();
+
+    const filtered = q
+      ? reviews.filter(r =>
+          r.name.toLowerCase().includes(q)    ||
+          r.product.toLowerCase().includes(q) ||
+          r.review.toLowerCase().includes(q)
+        )
+      : reviews;
+
+    document.getElementById('reviewCount').textContent = reviews.length;
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="8">
+        <div class="empty-state">
+          <span>${q ? '🔍' : '💬'}</span>
+          <p>${q ? 'Tidak ada review yang cocok dengan pencarian.' : 'Belum ada review. Jadilah yang pertama!'}</p>
+        </div>
+      </td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map((r, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td><strong>${r.name}</strong></td>
+        <td>${r.product}</td>
+        <td>${r.skin}</td>
+        <td class="stars-display" title="${r.rating} bintang">${starsHTML(r.rating)}</td>
+        <td>${r.review}</td>
+        <td style="white-space:nowrap">${r.date}</td>
+        <td><button class="btn-del" onclick="deleteReview(${r.id})">Hapus</button></td>
+      </tr>
+    `).join('');
+  }
+
+  // ── Delete ──
+  window.deleteReview = function(id) {
+    if (!confirm('Hapus review ini?')) return;
+    reviews = reviews.filter(r => r.id !== id);
+    renderTable();
+  };
+
+  // ── Submit ──
+  document.getElementById('btnSubmit').addEventListener('click', () => {
+    if (!validate()) return;
+
+    const newReview = {
+      id:      Date.now(),
+      name:    document.getElementById('f-name').value.trim(),
+      product: document.getElementById('f-product').value,
+      skin:    document.getElementById('f-skin').value,
+      rating:  parseInt(document.querySelector('input[name="rating"]:checked').value),
+      review:  document.getElementById('f-review').value.trim(),
+      date:    today()
+    };
+
+    reviews.unshift(newReview);
+    renderTable();
+
+    // reset form
+    document.getElementById('f-name').value    = '';
+    document.getElementById('f-product').value = '';
+    document.getElementById('f-skin').value    = '';
+    document.querySelectorAll('input[name="rating"]').forEach(r => r.checked = false);
+    document.getElementById('f-review').value  = '';
+    document.querySelectorAll('.form-group').forEach(g => g.classList.remove('has-error'));
+
+    // toast
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  });
+
+  // ── Table search ──
+  document.getElementById('tableSearch').addEventListener('input', function() {
+    filterQ = this.value;
+    renderTable();
+  });
+
+  // Clear error on change
+  ['f-name','f-product','f-skin','f-review'].forEach(id => {
+    const el  = document.getElementById(id);
+    const key = id.replace('f-','fg-');
+    el.addEventListener('input',  () => document.getElementById(key)?.classList.remove('has-error'));
+    el.addEventListener('change', () => document.getElementById(key)?.classList.remove('has-error'));
+  });
+  document.querySelectorAll('input[name="rating"]').forEach(r => {
+    r.addEventListener('change', () => document.getElementById('fg-rating').classList.remove('has-error'));
+  });
+
+  // Initial render
+  renderTable();
+</script>
+</body>
+</html>
