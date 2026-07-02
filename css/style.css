@@ -1,4 +1,4 @@
-/* ===== RESET & BASE ===== */
+
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -214,9 +214,11 @@ img { display: block; max-width: 100%; }
     display:flex;
     gap:45px;
     margin-top:70px;
+    text-align: center;
 }
 .feature {
     width:150px;
+    text-align: center;
 }
 
 .feature .icon {
