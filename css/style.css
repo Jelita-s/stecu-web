@@ -203,7 +203,7 @@ img { display: block; max-width: 100%; }
     border-radius: 2px;
 }
 
-.nav-menu a:hover { color: var(--white); }
+.nav-menu a:hover { color: var(--purple-light); }
 .nav-menu a:hover::after { width: 100%; }
 .nav-menu a.active { color: var(--purple-main); }
 .nav-menu a.active::after { width: 100%; }
