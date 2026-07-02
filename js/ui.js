@@ -17,17 +17,7 @@ function ffyToast(message) {
 }
 
 /* ---------- Header icons (cart / wishlist / account) ---------- */
-function initHeaderIcons() {
-  const cartBtn = document.getElementById('cartBtn');
-  const accountBtn = document.getElementById('accountBtn');
-  if (cartBtn) {
-    cartBtn.addEventListener('click', () => ffyToast('🛒 Keranjang belanja segera hadir!'));
-  }
-  if (accountBtn) {
-    accountBtn.addEventListener('click', () => ffyToast('👤 Fitur akun sedang dalam pengembangan.'));
-  }
-  updateWishlistBadge();
-}
+
 
 /* ---------- Wishlist (persisted in localStorage, shared across pages) ---------- */
 const FFY_WISHLIST_KEY = 'ffy_wishlist';
