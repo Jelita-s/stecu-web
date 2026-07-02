@@ -43,7 +43,7 @@ const PRODUCTS = [
     price: 101899,
     desc: "Mengandung cucumber, olive leaf extract, rosewater, soybean, dan sunflower oil. 2in1 Makeup Remover dan Sabun Cuci Muka pH Balanced.",
     link: "https://shopee.co.id/-Manohara's-Pick-Finally-Found-You!-SOY-GENTLE!-Face-Cleanser-i.856580029.14492559708",
-    image: "#"
+    image: "img/soy-gentle-cleanser.png"
   },
   {
     id: 5,
@@ -54,7 +54,7 @@ const PRODUCTS = [
     price: 136000,
     desc: "Mengandung ceramide, kojic acid, micellar cysteamine, dan soybean extract untuk memudarkan noda hitam dan hiperpigmentasi.",
     link: "https://shopee.co.id/-Manohara's-Pick-Finally-Found-You!-SOY-CLEAR-Brightening-Dark-Spot-Serum-i.856580029.26551470860",
-    image: "#"
+    image: "img/soy-clear-serum.png"
   },
   {
     id: 6,
@@ -65,7 +65,7 @@ const PRODUCTS = [
     price: 131000,
     desc: "Mengandung salicylic acid yang membantu mencerahkan kulit serta menjaga kebersihan pori-pori.",
     link: "https://shopee.co.id/-Manohara's-Pick-Finally-Found-You!-RICE-BRIGHT-GLOW-SERUM-20ml-i.856580029.41102715617",
-    image: "#"
+    image: "img/rice-bright-glow-serum.png"
   },
   {
     id: 7,
@@ -76,7 +76,7 @@ const PRODUCTS = [
     price: 136000,
     desc: "Mengandung retinal complex, colloidal oatmeal, oat, rice extract, dan soybean untuk menyamarkan tanda penuaan dini.",
     link: "https://shopee.co.id/Finally-Found-You!-FFY-OATstanding-Retinal-2in1-Eye-Face-Cream-i.856580029.23487862662",
-    image: "#"
+    image: "img/oatstanding-retinal-cream.png"
   },
   {
     id: 8,
@@ -87,7 +87,7 @@ const PRODUCTS = [
     price: 126000,
     desc: "Mengandung panthenol, allantoin, dan green tea leaf extract untuk kulit berjerawat dan sensitif.",
     link: "https://shopee.co.id/Finally-Found-You!-Acne-ProtecTea-Physical-Sunscreen-SPF-30-PA-50g-i.856580029.51401692620",
-    image: "#"
+    image: "img/protectea-sunscreen.png"
   },
   {
     id: 9,
@@ -98,7 +98,7 @@ const PRODUCTS = [
     price: 92000,
     desc: "Mengandung niacinamide, hyaluronic acid, hydrolyzed collagen, dan rice bran water untuk menjaga kelembapan dan mengatasi kulit kusam.",
     link: "https://shopee.co.id/Finally-Found-You!-RICE-UP!-Bright-Smooth-PEEL-OFF-MASK-50gr-i.856580029.29868385517",
-    image: "#"
+    image: "img/peel-off-mask.png"
   },
   {
     id: 10,
@@ -109,7 +109,7 @@ const PRODUCTS = [
     price: 131000,
     desc: "Mengandung AHA, BHA, peach, dan snail mucin untuk mengatasi jerawat, penuaan dini, komedo, dan noda hitam.",
     link: "https://shopee.co.id/Finally-Found-You!-TRIPLE-VITAMIN-B-ARRIER-PEACH-SNAIL-MUCIN-Intensive-Soothing-Moisturizing-Cream-50gr-i.856580029.29985600143",
-    image: "#"
+    image: "img/barrier-peach-snail-cream.png"
   },
   {
     id: 11,
@@ -120,7 +120,7 @@ const PRODUCTS = [
     price: 121000,
     desc: "Mengandung salicylic acid, LHA, niacinamide, zinc PCA, dan oat extract untuk merawat kulit berjerawat.",
     link: "https://shopee.co.id/Finally-Found-You!-OATSTANDING-BHA-LHA-Acne-Serum-i.856580029.28411975834",
-    image: "#"
+    image: "img/oatstanding-bha-lha-serum.png"
   },
   {
     id: 12,
