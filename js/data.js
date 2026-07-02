@@ -131,7 +131,7 @@ const PRODUCTS = [
     price: 111000,
     desc: "Mengandung AHA, BHA, PHA, LHA untuk menghaluskan, mencerahkan, dan mengangkat sel kulit mati.",
     link: "https://shopee.co.id/Finally-Found-You!-BERRY-DEEP-Exfoliating-Serum-20ml-i.856580029.27654540602",
-    image: "#"
+    image: "img/berry-deep-serum.png"
   },
   {
     id: 13,
@@ -142,7 +142,7 @@ const PRODUCTS = [
     price: 76000,
     desc: "Mengandung deep sea water, guaiazulene, allantoin, dan blue pea extract untuk menenangkan dan memperkuat skin barrier.",
     link: "https://shopee.co.id/Finally-Found-You!-Ocean-Blue-Pea-Dual-Phase-Micellar-Water-100ml-i.856580029.42256253477",
-    image: "#"
+    image: "img/blue-pea-miccelar-water.png"
   },
   {
     id: 14,
@@ -153,7 +153,7 @@ const PRODUCTS = [
     price: 131000,
     desc: "Mengandung AHA, BHA, antioksidan, mineral, dan bahan organik untuk mengatasi jerawat, penuaan dini, dan komedo.",
     link: "https://shopee.co.id/Finally-Found-You!-Calm-Dula-HOCL-Essence-Mist-100mL-i.856580029.42716839637",
-    image: "#"
+    image: "img/calm-dula-mist.png"
   },
   {
     id: 15,
@@ -164,7 +164,7 @@ const PRODUCTS = [
     price: 126000,
     desc: "Mengandung panthenol, vitamin B12, allantoin, snail extract, peach extract, dan niacinamide untuk memperkuat skin barrier.",
     link: "https://shopee.co.id/Finally-Found-You!-Triple-Vitamin-B-Arrier-Peach-Snail-Mucin-Intensive-Soothing-Essence-Toner-100mL-i.856580029.43211174429",
-    image: "#"
+    image: "img/barrier-peach-snail.png"
   },
   {
     id: 16,
@@ -175,7 +175,7 @@ const PRODUCTS = [
     price: 126000,
     desc: "Mengandung AHA, BHA, hyaluronic acid, peptide, dan vitamin C untuk mengatasi jerawat dan noda secara tepat sasaran.",
     link: "https://shopee.co.id/Finally-Found-You!-Acne-ProtecTea-Spot-Treatment-12g-i.856580029.51301692566",
-    image: "#"
+    image: "img/protectea-spot-treatment.png"
   },
   {
     id: 17,
@@ -186,7 +186,7 @@ const PRODUCTS = [
     price: 51000,
     desc: "Mengandung Vitamin C & Retinol untuk mencerahkan, mengencangkan, dan melembapkan kulit serta menyamarkan noda.",
     link: "https://shopee.co.id/-Amanda-Zahra's-Pick-Finally-Found-You!-BLACK-RICE-AI-High-Concentrated-Brightening-Body-Soap-i.856580029.50555404293",
-    image: "#"
+    image: "img/black-rice-body-soap.png"
   },
   {
     id: 18,
@@ -197,7 +197,7 @@ const PRODUCTS = [
     price: 126000,
     desc: "Mengandung Glycolic Acid, Kojic Acid & Alpha Arbutin, Hyaluronic Acid dan Ceramide untuk kulit lebih halus dan cerah.",
     link: "https://shopee.co.id/-Amanda-Zahra's-Pick-Finally-Found-You!-BLACK-RICE-AI-High-Concentrated-Brightening-Body-Scrub-i.856580029.54057538203",
-    image: "#"
+    image: "img/black-rice-body-scrub.png"
   },
   {
     id: 19,
@@ -208,7 +208,7 @@ const PRODUCTS = [
     price: 136000,
     desc: "Mengandung Retinal, Niacinamide, Kojic Acid, Alpha Arbutin, Glutathione, dan Rice Extract untuk kulit lebih cerah dan sehat.",
     link: "https://shopee.co.id/Finally-Found-You!-RICE-AI-High-Concentrated-Brightening-Body-Mask-i.856580029.41279371656",
-    image: "#"
+    image: "img/rice-ai-body-mask.png"
   },
   {
     id: 20,
@@ -219,7 +219,7 @@ const PRODUCTS = [
     price: 186000,
     desc: "Mengandung Alpha Arbutin, Tranexamic Acid, Kojic Acid, Allantoin dan Black Rice Extract untuk mencerahkan kulit badan.",
     link: "https://shopee.co.id/Finally-Found-You!-The-Ultimate-Concentrate-NANO-WHITE%E2%84%A2-BLACK-RICE-For-Body-Serum-Badan-Pencerah-30mL-i.856580029.40279392908",
-    image: "#"
+    image: "img/nano-white-body-serum.png"
   },
   {
     id: 21,
@@ -230,7 +230,7 @@ const PRODUCTS = [
     price: 116000,
     desc: "Mengandung 15% Niacinamide, Tranexamic Acid, Alpha Arbutin, Rice Extract dan Peptide untuk kulit glowing.",
     link: "https://shopee.co.id/-Amanda-Zahra's-Pick-Finally-Found-You!-RICE-AI-High-Concentrated-Brightening-Body-Lotion-i.856580029.54906304166",
-    image: "#"
+    image: "img/rice-ai-body-lotion.png"
   },
   {
     id: 22,
@@ -241,7 +241,7 @@ const PRODUCTS = [
     price: 136000,
     desc: "Mengandung Niacinamide, Peptide, Rice Bran Extract dan UV Protector untuk proteksi dan mencerahkan kulit badan.",
     link: "https://shopee.co.id/Finally-Found-You!-RICE-AI-UV-Bright-Tone-Up-Lotion-SPF-30-PA-i.856580029.42378822793",
-    image: "#"
+    image: "img/tone-up-lotion.png"
   },
   {
     id: 23,
@@ -252,6 +252,6 @@ const PRODUCTS = [
     price: 81000,
     desc: "Mengandung Vitamin C, Ubiquinone, dan Manuka Honey untuk mencerahkan, melembapkan, serta menyamarkan bibir gelap.",
     link: "https://shopee.co.id/Finally-Found-You!-C-U-Honey-Lip-Serum-untuk-Melembapkan-dan-Mencerahkan-Bibir-5ml-i.856580029.26865115812",
-    image: "#"
+    image: "img/honey-lip-serum.png"
   }
 ];
