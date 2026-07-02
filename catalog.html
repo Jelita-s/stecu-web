@@ -13,9 +13,20 @@
       padding: 56px 32px 48px;
       text-align: center;
       color: #fff;
+      position: relative;
+      overflow: hidden;
     }
-    .catalog-hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
-    .catalog-hero p  { color: rgba(255,255,255,.7); font-size: .95rem; }
+    .catalog-hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; position: relative; z-index: 1; }
+    .catalog-hero p  { color: rgba(255,255,255,.7); font-size: .95rem; position: relative; z-index: 1; }
+    .catalog-hero::before,
+    .catalog-hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+    }
+    .catalog-hero::before { width: 260px; height: 260px; top: -120px; left: -80px; }
+    .catalog-hero::after  { width: 200px; height: 200px; bottom: -110px; right: -50px; background: rgba(240,171,252,.12); }
 
     /* search + filter bar */
     .toolbar {
@@ -90,14 +101,112 @@
       outline: none;
       cursor: pointer;
     }
-    .result-info {
+    .btn-adv {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border-radius: 10px;
+      border: 1.5px solid #7c3aed;
+      background: #fff;
+      color: #7c3aed;
+      font-family: 'Poppins', sans-serif;
+      font-size: .85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+    .btn-adv:hover, .btn-adv.open { background: #7c3aed; color: #fff; }
+
+    /* advanced filter panel */
+    .adv-panel {
+      max-width: 1200px;
+      margin: 10px auto 0;
+      padding: 0 24px;
+    }
+    .adv-panel-inner {
+      display: none;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 24px rgba(91,33,182,.12);
+      padding: 18px 24px;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+    .adv-panel-inner.open { display: flex; }
+    .adv-field { display: flex; flex-direction: column; gap: 6px; }
+    .adv-field label { font-size: .78rem; font-weight: 700; color: #5b21b6; }
+    .adv-range { display: flex; align-items: center; gap: 8px; }
+    .adv-range input[type="number"] {
+      width: 110px;
+      padding: 8px 10px;
+      border: 1.5px solid #e9d5ff;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: .82rem;
+      color: #3b0764;
+      outline: none;
+    }
+    .adv-range input:focus { border-color: #7c3aed; }
+    .adv-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .84rem;
+      color: #4b5563;
+      cursor: pointer;
+    }
+    .btn-reset-adv {
+      background: none;
+      border: none;
+      color: #9ca3af;
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .btn-reset-adv:hover { color: #dc2626; }
+
+    .result-bar {
       max-width: 1200px;
       margin: 18px auto 4px;
       padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .result-info {
       font-size: .85rem;
       color: #6d28d9;
       font-weight: 600;
     }
+    .view-toggle {
+      display: flex;
+      gap: 6px;
+      background: #fff;
+      border: 1.5px solid #e9d5ff;
+      border-radius: 10px;
+      padding: 3px;
+    }
+    .view-btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      color: #a78bfa;
+      font-size: .95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+    }
+    .view-btn.active { background: #5b21b6; color: #fff; }
+
     .no-result {
       text-align: center;
       padding: 60px 20px;
@@ -115,24 +224,6 @@
       grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
       gap: 22px;
     }
-    .product-card { cursor: default; }
-    .category-tag {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-size: .72rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      text-transform: capitalize;
-    }
-    .tag-serum      { background:#ede9fe; color:#5b21b6; }
-    .tag-moisturizer{ background:#fce7f3; color:#9d174d; }
-    .tag-cleanser   { background:#d1fae5; color:#065f46; }
-    .tag-toner      { background:#dbeafe; color:#1e40af; }
-    .tag-sunscreen  { background:#fef3c7; color:#92400e; }
-    .tag-mask       { background:#ffe4e6; color:#be123c; }
-    .tag-body       { background:#f0fdf4; color:#166534; }
-    .tag-lip        { background:#fff1f2; color:#e11d48; }
   </style>
 </head>
 <body>
@@ -144,14 +235,18 @@
   <label for="menu-toggle" class="menu-icon">☰</label>
   <nav class="nav">
     <ul class="nav-menu">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="catalog.html" class="active">Produk</a></li>
-      <li><a href="req.html">Recommended</a></li>
-      <li><a href="review.html">Review</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalog.html" class="active">Produk</a></li>
+        <li><a href="req.html">Recommended</a></li>
+        <li><a href="review.html">Review</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
   </nav>
+  <div class="header-actions">
+    <button class="icon-btn" id="cartBtn" aria-label="Keranjang belanja">🛍️<span class="icon-badge">0</span></button>
+    <button class="icon-btn" id="accountBtn" aria-label="Akun saya">👤</button>
+  </div>
 </header>
 
 <!-- HERO -->
@@ -167,6 +262,7 @@
       <span class="icon">🔍</span>
       <input type="text" id="searchInput" placeholder="Cari produk, bahan aktif, manfaat…" autocomplete="off">
     </div>
+    <button class="btn-adv" id="advToggle" aria-expanded="false">⚙️ Filter Lanjutan</button>
     <div class="filter-row">
       <span style="font-size:.8rem;color:#6b7280;font-weight:600">Filter:</span>
       <button class="filter-btn active" data-cat="all">Semua</button>
@@ -184,11 +280,40 @@
       <option value="price-asc">Harga: Terendah</option>
       <option value="price-desc">Harga: Tertinggi</option>
       <option value="name-asc">Nama A–Z</option>
+      <option value="rating-desc">Rating Tertinggi</option>
     </select>
   </div>
 </div>
 
-<p class="result-info" id="resultInfo"></p>
+<!-- ADVANCED FILTER PANEL -->
+<div class="adv-panel">
+  <div class="adv-panel-inner" id="advPanel">
+    <div class="adv-field">
+      <label>Rentang Harga (Rp)</label>
+      <div class="adv-range">
+        <input type="number" id="priceMin" placeholder="Min" min="0" step="1000">
+        <span>–</span>
+        <input type="number" id="priceMax" placeholder="Max" min="0" step="1000">
+      </div>
+    </div>
+    <div class="adv-field">
+      <label>Rating</label>
+      <label class="adv-check">
+        <input type="checkbox" id="ratingFilter">
+        Hanya rating 4.5 ke atas
+      </label>
+    </div>
+    <button class="btn-reset-adv" id="advReset">Reset filter lanjutan</button>
+  </div>
+</div>
+
+<div class="result-bar">
+  <p class="result-info" id="resultInfo"></p>
+  <div class="view-toggle" role="group" aria-label="Tampilan produk">
+    <button class="view-btn active" id="gridViewBtn" aria-label="Tampilan grid">▦</button>
+    <button class="view-btn" id="listViewBtn" aria-label="Tampilan list">☰</button>
+  </div>
+</div>
 
 <!-- PRODUCT GRID -->
 <div id="product-grid"></div>
@@ -224,20 +349,25 @@
 </footer>
 
 <script src="js/data.js"></script>
+<script src="js/ui.js"></script>
 <script>
   const grid        = document.getElementById('product-grid');
   const searchInput = document.getElementById('searchInput');
   const sortSelect  = document.getElementById('sortSelect');
   const resultInfo  = document.getElementById('resultInfo');
   const filterBtns  = document.querySelectorAll('.filter-btn');
+  const advToggle   = document.getElementById('advToggle');
+  const advPanel    = document.getElementById('advPanel');
+  const advReset    = document.getElementById('advReset');
+  const priceMin    = document.getElementById('priceMin');
+  const priceMax    = document.getElementById('priceMax');
+  const ratingFilter= document.getElementById('ratingFilter');
+  const gridViewBtn = document.getElementById('gridViewBtn');
+  const listViewBtn = document.getElementById('listViewBtn');
 
   let activeCategory = 'all';
   let searchQuery    = '';
   let sortOrder      = 'default';
-
-  function formatPrice(n) {
-    return 'Rp ' + n.toLocaleString('id-ID');
-  }
 
   function renderProducts() {
     let list = [...PRODUCTS];
@@ -257,13 +387,23 @@
       );
     }
 
+    // advanced: price range
+    const min = parseFloat(priceMin.value);
+    const max = parseFloat(priceMax.value);
+    if (!isNaN(min)) list = list.filter(p => p.price >= min);
+    if (!isNaN(max)) list = list.filter(p => p.price <= max);
+
+    // advanced: rating
+    if (ratingFilter.checked) list = list.filter(p => p.rating >= 4.5);
+
     // sort
-    if (sortOrder === 'price-asc')  list.sort((a,b) => a.price - b.price);
-    if (sortOrder === 'price-desc') list.sort((a,b) => b.price - a.price);
-    if (sortOrder === 'name-asc')   list.sort((a,b) => a.name.localeCompare(b.name));
+    if (sortOrder === 'price-asc')   list.sort((a,b) => a.price - b.price);
+    if (sortOrder === 'price-desc')  list.sort((a,b) => b.price - a.price);
+    if (sortOrder === 'name-asc')    list.sort((a,b) => a.name.localeCompare(b.name));
+    if (sortOrder === 'rating-desc') list.sort((a,b) => b.rating - a.rating);
 
     // result info
-    resultInfo.textContent = `Menampilkan ${list.length} dari ${PRODUCTS.length} produk`;
+    resultInfo.innerHTML = `Menampilkan <strong>${list.length}</strong> dari ${PRODUCTS.length} produk`;
 
     // render
     if (list.length === 0) {
@@ -276,18 +416,7 @@
       return;
     }
 
-    grid.innerHTML = list.map(p => `
-      <div class="product-card">
-        <div class="img-placeholder">${p.name}</div>
-        <div class="product-info">
-          <span class="category-tag tag-${p.category}">${p.category}</span>
-          <h3>${p.name}</h3>
-          <p>${p.desc}</p>
-          <span class="price">${formatPrice(p.price)}</span>
-          <a href="${p.link}" target="_blank" class="btn-buy">Beli Sekarang</a>
-        </div>
-      </div>
-    `).join('');
+    grid.innerHTML = list.map(p => productCardHTML(p)).join('');
   }
 
   // Event listeners
@@ -308,6 +437,35 @@
       activeCategory = btn.dataset.cat;
       renderProducts();
     });
+  });
+
+  // Advanced filter panel
+  advToggle.addEventListener('click', () => {
+    const isOpen = advPanel.classList.toggle('open');
+    advToggle.classList.toggle('open', isOpen);
+    advToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  [priceMin, priceMax].forEach(el => el.addEventListener('input', renderProducts));
+  ratingFilter.addEventListener('change', renderProducts);
+
+  advReset.addEventListener('click', () => {
+    priceMin.value = '';
+    priceMax.value = '';
+    ratingFilter.checked = false;
+    renderProducts();
+  });
+
+  // Grid / list view toggle
+  gridViewBtn.addEventListener('click', () => {
+    grid.classList.remove('list-view');
+    gridViewBtn.classList.add('active');
+    listViewBtn.classList.remove('active');
+  });
+  listViewBtn.addEventListener('click', () => {
+    grid.classList.add('list-view');
+    listViewBtn.classList.add('active');
+    gridViewBtn.classList.remove('active');
   });
 
   // Initial render
