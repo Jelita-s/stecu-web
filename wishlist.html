@@ -167,38 +167,97 @@
 <script src="js/data.js"></script>
 <script src="js/ui.js"></script>
 <script>
-  const wishGrid  = document.getElementById('wishlist-grid');
-  const wishBar   = document.getElementById('wishBar');
-  const wishCount = document.getElementById('wishCount');
-  const wishEmpty = document.getElementById('wishEmpty');
-  const btnClear  = document.getElementById('btnClearWish');
+const wishGrid = document.getElementById('wishlist-grid');
+const wishBar = document.getElementById('wishBar');
+const wishCount = document.getElementById('wishCount');
+const wishEmpty = document.getElementById('wishEmpty');
+const btnClear = document.getElementById('btnClearWish');
 
-  function renderWishlistPage() {
-    const items = PRODUCTS.filter(p => isWishlisted(p.id));
+/* Hapus satu produk */
+function removeWish(id) {
+  const product = PRODUCTS.find(p => p.id === id);
 
-    if (items.length === 0) {
-      wishBar.style.display = 'none';
-      wishGrid.innerHTML = '';
-      wishEmpty.style.display = 'block';
-      return;
-    }
+  if (!confirm(`Hapus "${product.name}" dari wishlist?`)) return;
 
-    wishEmpty.style.display = 'none';
-    wishBar.style.display = 'flex';
-    wishCount.innerHTML = `<strong>${items.length}</strong> produk tersimpan`;
-    wishGrid.innerHTML = items.map(p => productCardHTML(p)).join('');
-  }
-
-  btnClear.addEventListener('click', () => {
-    if (!confirm('Hapus semua produk dari wishlist?')) return;
-    ffyWishlist.clear();
-    saveWishlist();
-    updateWishlistBadge();
-    ffyToast('Wishlist dikosongkan');
-    renderWishlistPage();
-  });
+  ffyWishlist.delete(id);
+  saveWishlist();
+  updateWishlistBadge();
+  ffyToast("Produk dihapus dari wishlist");
 
   renderWishlistPage();
+}
+
+/* Tampilkan wishlist */
+function renderWishlistPage() {
+  const items = PRODUCTS.filter(p => isWishlisted(p.id));
+
+  if (items.length === 0) {
+    wishBar.style.display = 'none';
+    wishGrid.innerHTML = '';
+    wishEmpty.style.display = 'block';
+    return;
+  }
+
+  wishEmpty.style.display = 'none';
+  wishBar.style.display = 'flex';
+  wishCount.innerHTML = `<strong>${items.length}</strong> produk tersimpan`;
+
+  wishGrid.innerHTML = items.map(p => {
+    const rating = p.rating ?? 4.5;
+    const reviews = p.reviews ?? 0;
+
+    return `
+      <div class="product-card">
+        <div class="product-media">
+          <span class="category-tag tag-${p.category}">${p.category}</span>
+          <div class="product-visual">
+            ${productVisualHTML(p)}
+          </div>
+        </div>
+
+        <div class="product-info">
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+
+          <div class="rating-row">
+            <span class="stars">${starsHTML(rating)}</span>
+            <span class="rating-count">${rating.toFixed(1)} (${reviews})</span>
+          </div>
+
+          <span class="price">
+            Rp ${p.price.toLocaleString('id-ID')}
+          </span>
+
+          <button
+            class="btn-clear-wish"
+            style="width:100%;margin:10px 0;"
+            onclick="removeWish(${p.id})">
+            🗑️ Hapus
+          </button>
+
+          <a href="${p.link}" target="_blank" class="btn-buy">
+            🛍️ Lihat Detail
+          </a>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* Hapus semua */
+btnClear.addEventListener('click', () => {
+  if (!confirm('Hapus semua produk dari wishlist?')) return;
+
+  ffyWishlist.clear();
+  saveWishlist();
+  updateWishlistBadge();
+
+  ffyToast('Wishlist dikosongkan');
+
+  renderWishlistPage();
+});
+
+renderWishlistPage();
 </script>
 </body>
 </html>
