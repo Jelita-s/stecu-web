@@ -14,14 +14,18 @@
   <label for="menu-toggle" class="menu-icon">☰</label>
   <nav class="nav">
     <ul class="nav-menu">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="catalog.html">Produk</a></li>
-      <li><a href="req.html">Recommended</a></li>
-      <li><a href="review.html">Review</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
-    </ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalog.html">Produk</a></li>
+        <li><a href="req.html">Recommended</a></li>
+        <li><a href="review.html">Review</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
   </nav>
+  <div class="header-actions">
+    <button class="icon-btn" id="cartBtn" aria-label="Keranjang belanja">🛍️<span class="icon-badge">0</span></button>
+    <button class="icon-btn" id="accountBtn" aria-label="Akun saya">👤</button>
+  </div>
 </header>
 <div class="about-hero">
   <h1>Get in Touch 💌</h1>
@@ -46,6 +50,20 @@
       </div>
     </div>
   </div>
+
+  <div class="contact-form-card">
+    <h2>Kirim Pesan Cepat 💬</h2>
+    <p>Isi form berikut, pesanmu akan langsung terbuka di WhatsApp kami.</p>
+    <div class="form-group">
+      <label for="qf-name">Nama Kamu</label>
+      <input type="text" id="qf-name" placeholder="contoh: Siti Rahayu" maxlength="60">
+    </div>
+    <div class="form-group">
+      <label for="qf-msg">Pesan</label>
+      <textarea id="qf-msg" placeholder="Tulis pertanyaan atau keluhan seputar kulitmu…" maxlength="400"></textarea>
+    </div>
+    <button class="btn-submit" id="qfSend">Kirim via WhatsApp 📩</button>
+  </div>
 </div>
 <footer class="footer">
   <div class="footer-top">
@@ -56,5 +74,20 @@
   <hr>
   <div class="footer-bottom">© 2026 Finally Found You. All rights reserved.</div>
 </footer>
+<script src="js/ui.js"></script>
+<script>
+  document.getElementById('qfSend').addEventListener('click', () => {
+    const name = document.getElementById('qf-name').value.trim();
+    const msg  = document.getElementById('qf-msg').value.trim();
+
+    if (!name || !msg) {
+      ffyToast('Mohon isi nama dan pesan terlebih dahulu.');
+      return;
+    }
+
+    const text = encodeURIComponent(`Halo Finally Found You, saya ${name}.\n\n${msg}`);
+    window.open(`https://wa.me/6285172480110?text=${text}`, '_blank');
+  });
+</script>
 </body>
 </html>
