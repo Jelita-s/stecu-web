@@ -227,14 +227,18 @@
   <label for="menu-toggle" class="menu-icon">☰</label>
   <nav class="nav">
     <ul class="nav-menu">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="catalog.html">Produk</a></li>
-      <li><a href="req.html">Recommended</a></li>
-      <li><a href="review.html" class="active">Review</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalog.html">Produk</a></li>
+        <li><a href="req.html">Recommended</a></li>
+        <li><a href="review.html" class="active">Review</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
   </nav>
+  <div class="header-actions">
+    <button class="icon-btn" id="cartBtn" aria-label="Keranjang belanja">🛍️<span class="icon-badge">0</span></button>
+    <button class="icon-btn" id="accountBtn" aria-label="Akun saya">👤</button>
+  </div>
 </header>
 
 <!-- HERO -->
@@ -370,6 +374,7 @@
 </footer>
 
 <script src="js/data.js"></script>
+<script src="js/ui.js"></script>
 <script>
   // ── Populate product dropdown ──
   const productSelect = document.getElementById('f-product');
