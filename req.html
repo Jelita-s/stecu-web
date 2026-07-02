@@ -33,14 +33,18 @@
   <label for="menu-toggle" class="menu-icon">☰</label>
   <nav class="nav">
     <ul class="nav-menu">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="catalog.html">Produk</a></li>
-      <li><a href="req.html" class="active">Recommended</a></li>
-      <li><a href="review.html">Review</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalog.html">Produk</a></li>
+        <li><a href="req.html" class="active">Recommended</a></li>
+        <li><a href="review.html">Review</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
   </nav>
+  <div class="header-actions">
+    <button class="icon-btn" id="cartBtn" aria-label="Keranjang belanja">🛍️<span class="icon-badge">0</span></button>
+    <button class="icon-btn" id="accountBtn" aria-label="Akun saya">👤</button>
+  </div>
 </header>
 
 <div class="rec-hero">
@@ -106,6 +110,7 @@
 </footer>
 
 <script src="js/data.js"></script>
+<script src="js/ui.js"></script>
 <script>
   document.getElementById('btnQuiz').addEventListener('click', () => {
     const q1 = document.querySelector('input[name="q1"]:checked');
@@ -143,23 +148,13 @@
       results = PRODUCTS.filter(p => p.category === kategori).slice(0, 4);
     }
 
-    results = results.slice(0, 6);
+    results = results.sort((a, b) => b.rating - a.rating).slice(0, 6);
 
     const recResult = document.getElementById('recResult');
     document.getElementById('recTitle').textContent =
       `💜 ${results.length} Produk Rekomendasi untuk Kulitmu`;
 
-    document.getElementById('recGrid').innerHTML = results.map(p => `
-      <div class="product-card">
-        <div class="img-placeholder">${p.name}</div>
-        <div class="product-info">
-          <h3>${p.name}</h3>
-          <p>${p.desc}</p>
-          <span class="price">Rp ${p.price.toLocaleString('id-ID')}</span>
-          <a href="${p.link}" target="_blank" class="btn-buy">Beli Sekarang</a>
-        </div>
-      </div>
-    `).join('');
+    document.getElementById('recGrid').innerHTML = results.map(p => productCardHTML(p)).join('');
 
     recResult.style.display = 'block';
     recResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
