@@ -24,14 +24,28 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-  </header>
+    <div class="header-actions">
+    <button class="icon-btn" id="cartBtn" aria-label="Keranjang belanja">🛍️<span class="icon-badge">0</span></button>
+    <button class="icon-btn" id="accountBtn" aria-label="Akun saya">👤</button>
+  </div>
+</header>
 
   <div class="about-hero">
     <h1>The Search is Over</h1>
     <p class="section-desc">Akhirnya, kamu menemukan apa yang dibutuhkan kulitmu</p>
   </div>
   <div class="container about-flex">
-    <div class="about-placeholder">Finally Found You</div>
+    <div class="about-placeholder">
+      <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="130" cy="130" r="110" fill="#ede9fe"/>
+        <rect x="82" y="96" width="96" height="110" rx="18" fill="#fff" stroke="#7c3aed" stroke-width="4"/>
+        <rect x="70" y="66" width="120" height="36" rx="14" fill="#5b21b6"/>
+        <circle cx="130" cy="152" r="20" fill="#7c3aed" opacity=".18"/>
+        <circle cx="130" cy="152" r="9" fill="#7c3aed"/>
+        <path d="M60 210c22-6 34-26 30-50-24 4-42 22-30 50z" fill="#a78bfa" opacity=".5"/>
+        <path d="M200 210c-22-6-34-26-30-50 24 4 42 22 30 50z" fill="#7c3aed" opacity=".4"/>
+      </svg>
+    </div>
     <div class="about-text">
       <h2>Kenapa Finally Found You?</h2>
       <p>Kami percaya bahwa skincare tidak harus rumit. Nama <strong>Finally Found You</strong> lahir dari perjalanan
@@ -98,6 +112,7 @@
     <hr>
     <div class="footer-bottom">© 2026 Finally Found You. All rights reserved.</div>
   </footer>
+<script src="js/ui.js"></script>
 </body>
 
 </html>
