@@ -10,7 +10,7 @@ const PRODUCTS = [
     price: 121000,
     desc: "Mengandung antioksidan, ceramide, dan hyaluronic acid yang membantu mengatasi tanda penuaan dini, noda hitam, kulit kering, dan kusam.",
     link: "https://shopee.co.id/-Manohara's-Pick-Finally-Found-You!-SOY-BRIGHT!-Moisturizer-2in1-Primer-Makeup-dan-Gel-Pelembab-Wajah-Siang-dan-Malam-untuk-Semua-Jenis-Kulit-i.856580029.18444376450",
-    image: "#"
+    image: "img/moisturizer.png"
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const PRODUCTS = [
     price: 141000,
     desc: "Mengandung AHA (Glycolic Acid), antioksidan, ceramide, mineral, dan panthenol untuk mengatasi jerawat, pori-pori besar, dan kemerahan.",
     link: "https://shopee.co.id/-Manohara's-Pick-Finally-Found-You!-HYDRICEING-BRIGHTENING-Essence-Booster-Serum-Infused-Toner-Untuk-Semua-Jenis-Kulit-100mL-i.856580029.24064685065",
-    image: "#"
+    image: "img/toner.png"
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const PRODUCTS = [
     price: 110900,
     desc: "Mengandung ceramide dan panthenol untuk mengatasi jerawat, menjaga kelembapan, dan memperkuat skin barrier.",
     link: "https://shopee.co.id/-Manohara's-Pick-Finally-Found-You!-SUN-RICE-ALL-DAY-Invisible-UV-Shield-SPF-50-PA-50ml-Sunscreen-Wajah-i.856580029.27327898085",
-    image: "#"
+    image: "img/sun-rice.png"
   },
   {
     id: 4,
