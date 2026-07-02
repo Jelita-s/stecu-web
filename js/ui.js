@@ -16,7 +16,7 @@ function ffyToast(message) {
   el._t = setTimeout(() => el.classList.remove('show'), 2400);
 }
 
-/* ---------- Header icons (cart / account) ---------- */
+/* ---------- Header icons (cart / wishlist / account) ---------- */
 function initHeaderIcons() {
   const cartBtn = document.getElementById('cartBtn');
   const accountBtn = document.getElementById('accountBtn');
@@ -26,23 +26,62 @@ function initHeaderIcons() {
   if (accountBtn) {
     accountBtn.addEventListener('click', () => ffyToast('👤 Fitur akun sedang dalam pengembangan.'));
   }
+  updateWishlistBadge();
 }
 
-/* ---------- Wishlist (in-memory for this session) ---------- */
-const ffyWishlist = new Set();
+/* ---------- Wishlist (persisted in localStorage, shared across pages) ---------- */
+const FFY_WISHLIST_KEY = 'ffy_wishlist';
+
+function loadWishlist() {
+  try {
+    const raw = localStorage.getItem(FFY_WISHLIST_KEY);
+    const ids = raw ? JSON.parse(raw) : [];
+    return new Set(Array.isArray(ids) ? ids : []);
+  } catch (e) {
+    return new Set();
+  }
+}
+
+function saveWishlist() {
+  try {
+    localStorage.setItem(FFY_WISHLIST_KEY, JSON.stringify([...ffyWishlist]));
+  } catch (e) { /* localStorage unavailable — fail silently */ }
+}
+
+const ffyWishlist = loadWishlist();
+
+function isWishlisted(id) {
+  return ffyWishlist.has(id);
+}
+
+function updateWishlistBadge() {
+  const badge = document.getElementById('wishlistBadge');
+  if (badge) badge.textContent = ffyWishlist.size;
+}
 
 function toggleWishlist(id, btn) {
   if (ffyWishlist.has(id)) {
     ffyWishlist.delete(id);
-    btn.classList.remove('active');
-    btn.textContent = '♡';
+    if (btn) {
+      btn.classList.remove('active');
+      btn.textContent = '♡';
+      btn.setAttribute('aria-pressed', 'false');
+    }
     ffyToast('Dihapus dari wishlist');
   } else {
     ffyWishlist.add(id);
-    btn.classList.add('active');
-    btn.textContent = '❤';
+    if (btn) {
+      btn.classList.add('active');
+      btn.textContent = '❤';
+      btn.setAttribute('aria-pressed', 'true');
+    }
     ffyToast('Ditambahkan ke wishlist ✨');
   }
+  saveWishlist();
+  updateWishlistBadge();
+
+  // Kalau lagi di halaman wishlist.html, list-nya langsung update
+  if (typeof renderWishlistPage === 'function') renderWishlistPage();
 }
 
 /* ---------- Star rating markup ---------- */
@@ -64,11 +103,12 @@ function productVisualHTML(p) {
 function productCardHTML(p) {
   const rating = p.rating != null ? p.rating : 4.5;
   const reviews = p.reviews != null ? p.reviews : 0;
+  const wished = isWishlisted(p.id);
   return `
     <div class="product-card">
       <div class="product-media">
         <span class="category-tag tag-${p.category}">${p.category}</span>
-        <button class="wishlist-btn" onclick="toggleWishlist(${p.id}, this)" aria-label="Simpan ke wishlist">♡</button>
+        <button class="wishlist-btn${wished ? ' active' : ''}" onclick="toggleWishlist(${p.id}, this)" aria-label="Simpan ke wishlist" aria-pressed="${wished}">${wished ? '❤' : '♡'}</button>
         <div class="product-visual">${productVisualHTML(p)}</div>
       </div>
       <div class="product-info">
@@ -84,4 +124,4 @@ function productCardHTML(p) {
     </div>`;
 }
 
-document.addEventListener('DOMContentLoaded', initHeaderIcons);
+document.addEventListener('DOMContentLoaded', initHeaderIcons)

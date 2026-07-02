@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wishlist Saya — Finally Found You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .wish-hero {
+      background: linear-gradient(135deg, #1e0438 0%, #3b0764 60%, #5b21b6 100%);
+      padding: 56px 32px 48px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .wish-hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; position: relative; z-index: 1; }
+    .wish-hero p  { color: rgba(255,255,255,.7); font-size: .95rem; position: relative; z-index: 1; }
+    .wish-hero::before,
+    .wish-hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+    }
+    .wish-hero::before { width: 260px; height: 260px; top: -120px; left: -80px; }
+    .wish-hero::after  { width: 200px; height: 200px; bottom: -110px; right: -50px; background: rgba(240,171,252,.12); }
+
+    .wish-bar {
+      max-width: 1200px;
+      margin: 24px auto 4px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .wish-count { font-size: .9rem; color: #6d28d9; font-weight: 600; }
+    .btn-clear-wish {
+      background: none;
+      border: 1.5px solid #fecdd3;
+      color: #e11d48;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-clear-wish:hover { background: #e11d48; color: #fff; border-color: #e11d48; }
+
+    #wishlist-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 24px 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 22px;
+    }
+
+    .wish-empty {
+      max-width: 480px;
+      margin: 40px auto 80px;
+      padding: 0 24px;
+      text-align: center;
+      color: #6b7280;
+    }
+    .wish-empty span { font-size: 3rem; display: block; margin-bottom: 14px; }
+    .wish-empty h2 { color: #3b0764; font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
+    .wish-empty p { font-size: .9rem; margin-bottom: 22px; }
+    .wish-empty .btn-quiz {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #3b0764;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: .92rem;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .wish-empty .btn-quiz:hover { background: #7c3aed; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">Finally Found You.</div>
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-icon">☰</label>
+  <nav class="nav">
+    <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalog.html">Produk</a></li>
+        <li><a href="req.html">Recommended</a></li>
+        <li><a href="review.html">Review</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+  </nav>
+  <div class="header-actions">
+    <a class="icon-btn" href="wishlist.html" id="wishlistBtn" aria-label="Wishlist saya">❤️<span class="icon-badge" id="wishlistBadge">0</span></a>
+    <button class="icon-btn" id="cartBtn" aria-label="Keranjang belanja">🛍️<span class="icon-badge">0</span></button>
+    <button class="icon-btn" id="accountBtn" aria-label="Akun saya">👤</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="wish-hero">
+  <h1>Wishlist Saya 💜</h1>
+  <p>Produk-produk favoritmu, tersimpan di sini supaya gampang ditemukan lagi</p>
+</div>
+
+<!-- BAR -->
+<div class="wish-bar" id="wishBar">
+  <p class="wish-count" id="wishCount"></p>
+  <button class="btn-clear-wish" id="btnClearWish">Kosongkan Wishlist</button>
+</div>
+
+<!-- WISHLIST GRID -->
+<div id="wishlist-grid"></div>
+
+<!-- EMPTY STATE -->
+<div class="wish-empty" id="wishEmpty" style="display:none">
+  <span>🤍</span>
+  <h2>Wishlist kamu masih kosong</h2>
+  <p>Tap ikon hati ♡ di produk favoritmu supaya tersimpan di sini.</p>
+  <a href="catalog.html" class="btn-quiz">Jelajahi Produk</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h2>Finally Found You.</h2>
+      <p>Sahabat terbaik untuk perjalanan kulit sehatmu.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Jelajahi</h3>
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="catalog.html">Produk</a></li>
+        <li><a href="about.html">Tentang Kami</a></li>
+        <li><a href="contact.html">Kontak</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Bantuan</h3>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Pengiriman</a></li>
+        <li><a href="#">Kebijakan Pengembalian</a></li>
+        <li><a href="#">Syarat & Ketentuan</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <div class="footer-bottom">© 2026 Finally Found You. All rights reserved.</div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script>
+  const wishGrid  = document.getElementById('wishlist-grid');
+  const wishBar   = document.getElementById('wishBar');
+  const wishCount = document.getElementById('wishCount');
+  const wishEmpty = document.getElementById('wishEmpty');
+  const btnClear  = document.getElementById('btnClearWish');
+
+  function renderWishlistPage() {
+    const items = PRODUCTS.filter(p => isWishlisted(p.id));
+
+    if (items.length === 0) {
+      wishBar.style.display = 'none';
+      wishGrid.innerHTML = '';
+      wishEmpty.style.display = 'block';
+      return;
+    }
+
+    wishEmpty.style.display = 'none';
+    wishBar.style.display = 'flex';
+    wishCount.innerHTML = `<strong>${items.length}</strong> produk tersimpan`;
+    wishGrid.innerHTML = items.map(p => productCardHTML(p)).join('');
+  }
+
+  btnClear.addEventListener('click', () => {
+    if (!confirm('Hapus semua produk dari wishlist?')) return;
+    ffyWishlist.clear();
+    saveWishlist();
+    updateWishlistBadge();
+    ffyToast('Wishlist dikosongkan');
+    renderWishlistPage();
+  });
+
+  renderWishlistPage();
+</script>
+</body>
+</html>
