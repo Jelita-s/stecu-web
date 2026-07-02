@@ -1,4 +1,3 @@
-
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -507,6 +506,30 @@ img { display: block; max-width: 100%; }
 .product-card:hover .product-visual { transform: scale(1.06) rotate(-1deg); }
 
 .product-visual svg { width: 64%; height: 64%; overflow: visible; }
+
+.product-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-visual-placeholder,
+.product-visual-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--text-muted);
+    font-size: 2rem;
+}
+
+.product-visual-placeholder span {
+    font-size: .72rem;
+    font-weight: 600;
+}
 
 /* legacy alias kept for compatibility */
 .img-placeholder {
