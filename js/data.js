@@ -253,5 +253,82 @@ const PRODUCTS = [
     desc: "Mengandung Vitamin C, Ubiquinone, dan Manuka Honey untuk mencerahkan, melembapkan, serta menyamarkan bibir gelap.",
     link: "https://shopee.co.id/Finally-Found-You!-C-U-Honey-Lip-Serum-untuk-Melembapkan-dan-Mencerahkan-Bibir-5ml-i.856580029.26865115812",
     image: "img/honey-lip-serum.png"
+  },
+  {
+    id: 24,
+    rating: 4.7,
+    reviews: 52,
+    name: "COPPER PEPTIDE + CAVIAR Double Revive Serum",
+    category: "serum",
+    price: 149000,
+    desc: "Mengandung copper peptide, green caviar, alpha arbutin, dan glutathione untuk merawat tanda penuaan, melembapkan, dan mencerahkan kulit.",
+    link: "https://id.shp.ee/gJLJ3X7G",
+    image: "img/caviar.jpeg"
+  },
+  {
+    id: 25,
+    rating: 4.6,
+    reviews: 37,
+    name: "The Ultimate Concentrate Vitamin C + Ginseng Serum",
+    category: "serum",
+    price: 156000,
+    desc: "Diformulasikan dengan 15% pure Vitamin C dan ginseng kaya antioksidan untuk mengatasi kulit kusam dan meratakan warna kulit.",
+    link: "https://id.shp.ee/QckVE5dW",
+    image: "img/gingseng.jpeg"
+  },
+  {
+    id: 26,
+    rating: 4.5,
+    reviews: 29,
+    name: "Ocean Blue Pea Dual-Phase Essence Mist",
+    category: "toner",
+    price: 121000,
+    desc: "Mengandung blue pea extract dan bahan dual-phase untuk menyegarkan, melembapkan, dan menenangkan kulit sepanjang hari.",
+    link: "https://id.shp.ee/t6eX4Bny",
+    image: "img/esense mist.jpeg"
+  },
+  {
+    id: 27,
+    rating: 4.6,
+    reviews: 64,
+    name: "RICE+ Glass AI Skin Tint Fluid Sunscreen SPF 30 PA++++",
+    category: "sunscreen",
+    price: 116000,
+    desc: "Sunscreen dengan skin tint ringan, SPF 30 PA++++, membantu mencerahkan sekaligus melindungi kulit dari sinar UV tanpa white cast.",
+    link: "https://id.shp.ee/NMpraShX",
+    image: "img/skintint.jpeg"
+  },
+  {
+    id: 28,
+    rating: 4.7,
+    reviews: 41,
+    name: "RICE+ Glass AI Hybrid Tone-Up Essence Day Cream SPF 30 PA++++",
+    category: "moisturizer",
+    price: 141000,
+    desc: "Krim siang 3in1 yang mencerahkan, melembapkan, dan melindungi kulit dari UV serta blue light berkat kandungan SYNCHROLIFE™, tanpa white cast.",
+    link: "d.shp.ee/eUgQgjr9",
+    image: "img/tone up.jpeg"
+  },
+  {
+    id: 29,
+    rating: 4.5,
+    reviews: 33,
+    name: "RICE + MANDELIC + NIACINAMIDE Brightening Powder Mask",
+    category: "mask",
+    price: 96000,
+    desc: "Masker bubuk eksfoliasi dengan rice, mandelic acid, dan niacinamide untuk mencerahkan kulit dan mengangkat sel kulit mati tanpa bikin kering.",
+    link: "https://id.shp.ee/7CW78Wnd",
+    image: "img/powdermask.jpeg"
+  },
+  {
+    id: 30,
+    rating: 4.6,
+    reviews: 58,
+    name: "ProtecTEA+ AI Smart Odor Control Antiperspirant Deodorant",
+    category: "body",
+    price: 66000,
+    desc: "Deodoran antiperspirant yang membantu mengontrol bau badan sekaligus mencerahkan area ketiak tanpa meninggalkan rasa lengket.",
+    link: "https://id.shp.ee/6f45dLCP",
+    image: "img/deodorant.jpeg"
   }
 ];
