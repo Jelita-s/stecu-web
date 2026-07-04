@@ -306,7 +306,7 @@ const PRODUCTS = [
     category: "moisturizer",
     price: 141000,
     desc: "Krim siang 3in1 yang mencerahkan, melembapkan, dan melindungi kulit dari UV serta blue light berkat kandungan SYNCHROLIFE™, tanpa white cast.",
-    link: "d.shp.ee/eUgQgjr9",
+    link: "https://id.shp.ee/eUgQgjr9",
     image: "img/tone up.jpeg"
   },
   {
