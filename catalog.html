@@ -183,30 +183,6 @@
       color: #6d28d9;
       font-weight: 600;
     }
-    .view-toggle {
-      display: flex;
-      gap: 6px;
-      background: #fff;
-      border: 1.5px solid #e9d5ff;
-      border-radius: 10px;
-      padding: 3px;
-    }
-    .view-btn {
-      width: 32px;
-      height: 32px;
-      border: none;
-      background: transparent;
-      border-radius: 8px;
-      color: #a78bfa;
-      font-size: .95rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all .2s;
-    }
-    .view-btn.active { background: #5b21b6; color: #fff; }
-
     .no-result {
       text-align: center;
       padding: 60px 20px;
@@ -310,14 +286,10 @@
 
 <div class="result-bar">
   <p class="result-info" id="resultInfo"></p>
-  <div class="view-toggle" role="group" aria-label="Tampilan produk">
-    <button class="view-btn active" id="gridViewBtn" aria-label="Tampilan grid">▦</button>
-    <button class="view-btn" id="listViewBtn" aria-label="Tampilan list">☰</button>
-  </div>
 </div>
 
 <!-- PRODUCT GRID -->
-<div id="product-grid"></div>
+<div id="product-grid" class="product-grid"></div>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -363,8 +335,6 @@
   const priceMin    = document.getElementById('priceMin');
   const priceMax    = document.getElementById('priceMax');
   const ratingFilter= document.getElementById('ratingFilter');
-  const gridViewBtn = document.getElementById('gridViewBtn');
-  const listViewBtn = document.getElementById('listViewBtn');
 
   let activeCategory = 'all';
   let searchQuery    = '';
@@ -455,18 +425,6 @@
     priceMax.value = '';
     ratingFilter.checked = false;
     renderProducts();
-  });
-
-  // Grid / list view toggle
-  gridViewBtn.addEventListener('click', () => {
-    grid.classList.remove('list-view');
-    gridViewBtn.classList.add('active');
-    listViewBtn.classList.remove('active');
-  });
-  listViewBtn.addEventListener('click', () => {
-    grid.classList.add('list-view');
-    listViewBtn.classList.add('active');
-    gridViewBtn.classList.remove('active');
   });
 
   // Initial render
