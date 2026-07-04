@@ -7,6 +7,19 @@
   <title>Finally Found You</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ─── SCROLL REVEAL ANIMATION ───────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 
 <body>
@@ -70,7 +83,7 @@
 
 
       <div class="features">
-        <div class="feature">
+        <div class="feature reveal">
           <div class="icon">
             ♡
           </div>
@@ -82,7 +95,7 @@
           </p>
 
         </div>
-        <div class="feature">
+        <div class="feature reveal">
           <div class="icon">
             🍃
           </div>
@@ -94,7 +107,7 @@
           </p>
         </div>
         
-        <div class="feature">
+        <div class="feature reveal">
           <div class="icon">
             👍
           </div>
@@ -110,7 +123,7 @@
 
     </div>
 
-    <div class="hero-right">
+    <div class="hero-right reveal">
         <div class="image-placeholder">
             <img src="img/woman.png" alt="Woman">
         </div>
@@ -130,7 +143,7 @@
     </div>
   </section>
 
-  <footer class="footer">
+  <footer class="footer reveal">
     <div class="footer-top">
       <div class="footer-brand">
         <h2>Finally Found You.</h2>
@@ -160,6 +173,24 @@
   </footer>
 
   <script src="js/ui.js"></script>
+
+  <script>
+    // ─── SCROLL REVEAL ANIMATION ─────────────────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target); 
+        }
+      });
+    }, {
+      threshold: 0.15 
+    });
+
+    document.querySelectorAll('.reveal').forEach((el) => {
+      revealObserver.observe(el);
+    });
+  </script>
 </body>
 
 </html>
