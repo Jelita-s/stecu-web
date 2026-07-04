@@ -996,11 +996,12 @@ main .section-desc {
 
     #menu-toggle:checked + .menu-icon + .nav .nav-menu { display: flex; }
 
+    /* fix: link text was the same purple as the dropdown background (invisible) */
     .nav-menu a { color: var(--white); }
     .nav-menu a:hover { color: var(--accent-pink); }
     .nav-menu a.active { color: var(--accent-pink); }
 
-   
+    /* header: shrink logo + icons so they don't overflow/clip on narrow phones */
     .logo {
         font-size: 1.05rem;
         max-width: 44vw;
@@ -1022,7 +1023,30 @@ main .section-desc {
     .hero-left { max-width: 100%; }
     .hero-left h1 { font-size: 1.9rem; }
     .hero-right { align-items: center; width: 100%; }
+    .image-placeholder { height: 320px; }
+    .customer-card {
+        position: static;
+        width: 100%;
+        max-width: 300px;
+        margin: 16px auto 0;
+    }
+    .hero-buttons { flex-direction: column; gap: 14px; }
     .btn, .btn-outline { width: 100%; text-align: center; }
+
+    /* feature icons row: was overflowing off-screen (wrong class was targeted) */
+    .features {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+        margin-top: 40px;
+    }
+    .feature {
+        width: calc(50% - 12px);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
     /* grids */
     .features-grid { grid-template-columns: 1fr; }
