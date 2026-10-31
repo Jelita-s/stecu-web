@@ -1193,3 +1193,11 @@ main .section-desc {
 a.icon-btn {
     text-decoration: none;
 }
+
+
+/* ===== Tombol keranjang: state setelah ditambahkan ===== */
+.btn-cart-icon.added {
+    background: var(--purple-main);
+    border-color: var(--purple-main);
+    color: var(--white);
+}

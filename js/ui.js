@@ -18,15 +18,12 @@ function ffyToast(message) {
 
 /* ---------- Header icons (cart / wishlist / account) ---------- */
 function initHeaderIcons() {
-  const cartBtn = document.getElementById('cartBtn');
   const accountBtn = document.getElementById('accountBtn');
-  if (cartBtn) {
-    cartBtn.addEventListener('click', () => ffyToast('🛒 Keranjang belanja segera hadir!'));
-  }
   if (accountBtn) {
     accountBtn.addEventListener('click', () => ffyToast('👤 Fitur akun sedang dalam pengembangan.'));
   }
   updateWishlistBadge();
+  if (typeof updateCartBadge === 'function') updateCartBadge();
 }
 
 /* ---------- Wishlist (persisted in localStorage, shared across pages) ---------- */
@@ -119,7 +116,10 @@ function productCardHTML(p) {
           <span class="rating-count">${rating.toFixed(1)} (${reviews})</span>
         </div>
         <span class="price">Rp ${p.price.toLocaleString('id-ID')}</span>
-        <a href="${p.link}" target="_blank" class="btn-buy">🛍️ Lihat Detail</a>
+        <div class="buy-row">
+          <a href="${p.link}" target="_blank" class="btn-buy">🛍️ Lihat Detail</a>
+          <button class="btn-cart-icon" onclick="addToCart(${p.id}, this)" aria-label="Tambah ke keranjang" title="Tambah ke keranjang">🛒</button>
+        </div>
       </div>
     </div>`;
 }

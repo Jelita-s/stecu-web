@@ -157,68 +157,7 @@
     .cart-actions a:hover,
     .cart-actions button:hover { text-decoration: underline; }
 
-    /* ---------- Ringkasan ---------- */
-    .summary {
-      position: sticky;
-      top: 90px;
-      padding: 22px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-    }
-
-    .summary h2 {
-      font-size: 1.15rem;
-      margin-bottom: 14px;
-    }
-
-    .sum-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      font-size: 0.92rem;
-      color: #4b5563;
-    }
-
-    .sum-total {
-      display: flex;
-      justify-content: space-between;
-      margin: 14px 0 18px;
-      padding-top: 14px;
-      border-top: 1px dashed #e5d5de;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-
-    .sum-total span:last-child { color: var(--accent-text); }
-
-    .btn-checkout {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
-      color: #fff;
-      font-family: inherit;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn-checkout:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 26px rgba(236, 72, 153, 0.4);
-    }
-
-    .note {
-      margin-top: 12px;
-      font-size: 0.78rem;
-      color: #9ca3af;
-      text-align: center;
-    }
+    
 
     /* ---------- Keranjang kosong ---------- */
     .cart-empty {
@@ -278,8 +217,8 @@
       </ul>
     </nav>
     <div class="header-actions">
-      <a class="icon-btn" href="wishlist.html" aria-label="Wishlist saya">❤️<span id="wishlistBadge">0</span></a>
-      <a class="icon-btn" href="keranjang.html" aria-label="Keranjang saya">🛍️<span id="cartBadge">0</span></a>
+      <a class="icon-btn" href="wishlist.html" id="wishlistBtn" aria-label="Wishlist saya">❤️<span class="icon-badge" id="wishlistBadge">0</span></a>
+      <a class="icon-btn" href="keranjang.html" id="cartBtn" aria-label="Keranjang saya">🛍️<span class="icon-badge" id="cartBadge">0</span></a>
       <button class="icon-btn" id="accountBtn" aria-label="Akun saya">👤</button>
     </div>
   </header>
@@ -311,9 +250,10 @@
     <div class="footer-bottom">© 2026 Finally Found You. All rights reserved.</div>
   </footer>
 
-  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/ui.js"></script>
   <script>
-    // Butuh fungsi loadCart, saveCart, updateCartBadge dari js/auth.js
+    // Fungsi loadCart, saveCart, updateCartBadge ada di js/cart.js
     const root = document.getElementById('cartRoot');
     const sub = document.getElementById('cartSub');
 
@@ -347,7 +287,7 @@
           <div>
             <div class="ci-name">${esc(i.name)}</div>
             <div class="ci-price">${rupiah(i.price)}</div>
-            ${i.link ? <a class="ci-link" href="${esc(i.link)}" target="_blank" rel="noopener">Lihat detail produk ↗️</a> : ''}
+            ${i.link ? `<a class="ci-link" href="${esc(i.link)}" target="_blank" rel="noopener">Lihat detail produk ↗️</a>` : ''}
           </div>
           <div class="ci-side">
             <div class="qty">
@@ -368,15 +308,7 @@
               <button id="clearCart">Kosongkan keranjang</button>
             </div>
           </div>
-          <aside class="summary">
-            <h2>Ringkasan Belanja</h2>
-            <div class="sum-row"><span>Jumlah produk</span><span>${totalQty}</span></div>
-            <div class="sum-row"><span>Subtotal</span><span>${rupiah(subtotal)}</span></div>
-            <div class="sum-row"><span>Ongkir</span><span>Dihitung saat checkout</span></div>
-            <div class="sum-total"><span>Total</span><span>${rupiah(subtotal)}</span></div>
-            <button class="btn-checkout" id="checkoutBtn">Lanjut ke Checkout</button>
-            <p class="note">Harga belum termasuk ongkos kirim.</p>
-          </aside>
+          
         </div>`;
 
       updateCartBadge();
@@ -396,7 +328,7 @@
       }
 
       if (btn.id === 'checkoutBtn') {
-        const loggedIn = localStorage.getItem('ffy_session') || sessionStorage.getItem('ffy_session');
+        const loggedIn = window.FFYAuth && FFYAuth.currentUser();
         if (!loggedIn) {
           ffyToast('Masuk dulu ya sebelum checkout 💕');
           setTimeout(() => (window.location.href = 'login.html'), 1200);
