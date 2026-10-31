@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keranjang - Finally Found You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== Halaman Keranjang ===== */
+    .cart-page {
+      --accent-from: #f472b6;
+      --accent-to: #ec4899;
+      --accent-text: #be185d;
+      --line: #f3e8ee;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 70px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .cart-page h1 {
+      font-size: 2rem;
+      margin-bottom: 4px;
+    }
+
+    .cart-sub {
+      color: #6b7280;
+      margin-bottom: 28px;
+    }
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* ---------- Daftar item ---------- */
+    .cart-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+
+    .cart-item img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 14px;
+      background: #fdf2f8;
+    }
+
+    .ci-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .ci-price {
+      color: var(--accent-text);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .ci-link {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: #8b5cf6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .ci-link:hover { text-decoration: underline; }
+
+    .ci-side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .qty {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .qty button {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: #fdf2f8;
+      color: var(--accent-text);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .qty button:hover { background: #fce7f3; }
+
+    .qty span {
+      min-width: 34px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .ci-remove {
+      border: none;
+      background: none;
+      color: #dc2626;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .ci-remove:hover { text-decoration: underline; }
+
+    .cart-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+      font-size: 0.9rem;
+    }
+
+    .cart-actions a,
+    .cart-actions button {
+      border: none;
+      background: none;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #8b5cf6;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 0;
+    }
+
+    .cart-actions a:hover,
+    .cart-actions button:hover { text-decoration: underline; }
+
+    /* ---------- Ringkasan ---------- */
+    .summary {
+      position: sticky;
+      top: 90px;
+      padding: 22px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .summary h2 {
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+    }
+
+    .sum-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 0.92rem;
+      color: #4b5563;
+    }
+
+    .sum-total {
+      display: flex;
+      justify-content: space-between;
+      margin: 14px 0 18px;
+      padding-top: 14px;
+      border-top: 1px dashed #e5d5de;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .sum-total span:last-child { color: var(--accent-text); }
+
+    .btn-checkout {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-checkout:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(236, 72, 153, 0.4);
+    }
+
+    .note {
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    /* ---------- Keranjang kosong ---------- */
+    .cart-empty {
+      text-align: center;
+      padding: 60px 20px;
+      background: #fff;
+      border: 1px dashed #f0cfe0;
+      border-radius: 22px;
+    }
+
+    .cart-empty .big { font-size: 3rem; margin-bottom: 10px; }
+    .cart-empty h2 { margin-bottom: 6px; }
+    .cart-empty p { color: #6b7280; margin-bottom: 20px; }
+
+    .btn-shop {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    @media (max-width: 860px) {
+      .cart-layout { grid-template-columns: 1fr; }
+      .summary { position: static; }
+    }
+
+    @media (max-width: 520px) {
+      .cart-item { grid-template-columns: 70px 1fr; }
+      .cart-item img { width: 70px; height: 70px; }
+      .ci-side {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="logo">Finally Found You.</div>
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon">☰</label>
+    <nav class="nav">
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalog.html">Produk</a></li>
+        <li><a href="req.html">Recommended</a></li>
+        <li><a href="review.html">Review</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="wishlist.html" aria-label="Wishlist saya">❤️<span id="wishlistBadge">0</span></a>
+      <a class="icon-btn" href="keranjang.html" aria-label="Keranjang saya">🛍️<span id="cartBadge">0</span></a>
+      <button class="icon-btn" id="accountBtn" aria-label="Akun saya">👤</button>
+    </div>
+  </header>
+
+  <main class="cart-page">
+    <h1>Keranjang Belanja 🛍️</h1>
+    <p class="cart-sub" id="cartSub">Cek lagi produk pilihanmu sebelum checkout.</p>
+
+    <div id="cartRoot"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2>Finally Found You.</h2>
+        <p>Sahabat terbaik untuk perjalanan kulit sehatmu.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Jelajahi</h3>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="catalog.html">Produk</a></li>
+          <li><a href="about.html">Tentang Kami</a></li>
+          <li><a href="contact.html">Kontak</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <div class="footer-bottom">© 2026 Finally Found You. All rights reserved.</div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script>
+    // Butuh fungsi loadCart, saveCart, updateCartBadge dari js/auth.js
+    const root = document.getElementById('cartRoot');
+    const sub = document.getElementById('cartSub');
+
+    const rupiah = n => 'Rp ' + Number(n).toLocaleString('id-ID');
+    const esc = s => String(s).replace(/[&<>"']/g, c =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function render() {
+      const items = loadCart();
+
+      if (!items.length) {
+        sub.textContent = 'Keranjangmu masih kosong.';
+        root.innerHTML = `
+          <div class="cart-empty">
+            <div class="big">🛍️</div>
+            <h2>Belum ada produk di keranjang</h2>
+            <p>Yuk jelajahi produk dan temukan skincare yang cocok untukmu.</p>
+            <a class="btn-shop" href="catalog.html">Lihat Produk</a>
+          </div>`;
+        updateCartBadge();
+        return;
+      }
+
+      const totalQty = items.reduce((s, i) => s + i.qty, 0);
+      const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+      sub.textContent = totalQty + ' produk di keranjangmu.';
+
+      const rows = items.map(i => `
+        <div class="cart-item" data-id="${i.id}">
+          <img src="${esc(i.image || '')}" alt="${esc(i.name)}">
+          <div>
+            <div class="ci-name">${esc(i.name)}</div>
+            <div class="ci-price">${rupiah(i.price)}</div>
+            ${i.link ? <a class="ci-link" href="${esc(i.link)}" target="_blank" rel="noopener">Lihat detail produk ↗️</a> : ''}
+          </div>
+          <div class="ci-side">
+            <div class="qty">
+              <button data-act="dec" aria-label="Kurangi jumlah">−</button>
+              <span>${i.qty}</span>
+              <button data-act="inc" aria-label="Tambah jumlah">+</button>
+            </div>
+            <button class="ci-remove" data-act="remove">Hapus</button>
+          </div>
+        </div>`).join('');
+
+      root.innerHTML = `
+        <div class="cart-layout">
+          <div>
+            <div class="cart-list">${rows}</div>
+            <div class="cart-actions">
+              <a href="catalog.html">← Lanjut belanja</a>
+              <button id="clearCart">Kosongkan keranjang</button>
+            </div>
+          </div>
+          <aside class="summary">
+            <h2>Ringkasan Belanja</h2>
+            <div class="sum-row"><span>Jumlah produk</span><span>${totalQty}</span></div>
+            <div class="sum-row"><span>Subtotal</span><span>${rupiah(subtotal)}</span></div>
+            <div class="sum-row"><span>Ongkir</span><span>Dihitung saat checkout</span></div>
+            <div class="sum-total"><span>Total</span><span>${rupiah(subtotal)}</span></div>
+            <button class="btn-checkout" id="checkoutBtn">Lanjut ke Checkout</button>
+            <p class="note">Harga belum termasuk ongkos kirim.</p>
+          </aside>
+        </div>`;
+
+      updateCartBadge();
+    }
+
+    // Tombol + / − / Hapus (event delegation)
+    root.addEventListener('click', e => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+
+      if (btn.id === 'clearCart') {
+        if (confirm('Kosongkan semua produk di keranjang?')) {
+          saveCart([]);
+          render();
+        }
+        return;
+      }
+
+      if (btn.id === 'checkoutBtn') {
+        const loggedIn = localStorage.getItem('ffy_session') || sessionStorage.getItem('ffy_session');
+        if (!loggedIn) {
+          ffyToast('Masuk dulu ya sebelum checkout 💕');
+          setTimeout(() => (window.location.href = 'login.html'), 1200);
+          return;
+        }
+        ffyToast('Checkout segera hadir! ✨');
+        return;
+      }
+
+      const row = btn.closest('.cart-item');
+      if (!row) return;
+      const id = Number(row.dataset.id);
+      const items = loadCart();
+      const idx = items.findIndex(i => i.id === id);
+      if (idx === -1) return;
+
+      const act = btn.dataset.act;
+      if (act === 'inc') items[idx].qty += 1;
+      if (act === 'dec') items[idx].qty = Math.max(1, items[idx].qty - 1);
+      if (act === 'remove') {
+        items.splice(idx, 1);
+        ffyToast('Dihapus dari keranjang');
+      }
+
+      saveCart(items);
+      render();
+    });
+
+    render();
+  </script>
+</body>
+
+</html>

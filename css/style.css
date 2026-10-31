@@ -1090,6 +1090,7 @@ main .section-desc {
     .cta { margin: 0 12px 40px; }
 }
 
+
 @media (max-width: 480px) {
     .hero-left h1 { font-size: 1.5rem; }
     .about-hero h1 { font-size: 1.7rem; }
@@ -1099,4 +1100,96 @@ main .section-desc {
     .header { gap: 6px; padding: 8px 10px; }
     .header-actions { gap: 3px; }
     .icon-btn { width: 29px; height: 29px; font-size: 0.82rem; }
+}
+
+/* ---------- Tulisan Masuk / Daftar / Lihat: ungu, tanpa tombol ---------- */
+.auth-tabs {
+    display: flex;
+    gap: 24px;
+    padding: 0;
+    background: none;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 22px;
+}
+
+.auth-tab {
+    padding: 8px 0;
+    border: none;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: #8b5cf6;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.auth-tab:hover { opacity: 1; }
+
+.auth-tab.active {
+    opacity: 1;
+    border-bottom: 2px solid #8b5cf6;
+    margin-bottom: -1px;
+}
+
+.pw-toggle {
+    border: none;
+    background: none;
+    padding: 0;
+    color: #8b5cf6;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.pw-toggle:hover { color: #6d28d9; }
+
+/* ===== Baris tombol produk: [Lihat Detail] [Keranjang] ===== */
+.buy-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.buy-row .btn-buy {
+    flex: 1;
+}
+
+.btn-cart-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid var(--purple-pale);
+    border-radius: 50%;
+    background: var(--purple-pale);
+    color: var(--purple-dark);
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.btn-cart-icon:hover {
+    background: var(--white);
+    border-color: var(--purple-light);
+    transform: scale(1.1);
+}
+
+.btn-cart-icon:active {
+    transform: scale(0.95);
+}
+
+/* ===== Perbaikan ikon hamburger ===== */
+.menu-icon {
+    color: var(--purple-dark);
+}
+
+/* ===== Link di dalam header-actions ===== */
+a.icon-btn {
+    text-decoration: none;
 }

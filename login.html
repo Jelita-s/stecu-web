@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masuk - Finally Found You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="logo">Finally Found You.</div>
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon">☰</label>
+    <nav class="nav">
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalog.html">Produk</a></li>
+        <li><a href="req.html">Recommended</a></li>
+        <li><a href="review.html">Review</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="wishlist.html" aria-label="Wishlist saya">❤️</a>
+      <button class="icon-btn" id="accountBtn" aria-label="Akun saya">👤</button>
+    </div>
+  </header>
+
+  <main class="hero auth-hero">
+
+    <div class="hero-left">
+      <div class="badge">
+        Akun Finally Found You ✨
+      </div>
+
+      <h1>
+        Welcome<br>
+        back to your<br>
+        <span>skin journey</span>
+      </h1>
+
+      <p>
+        Masuk untuk menyimpan wishlist dan melihat kembali
+        rekomendasi skincare yang cocok untuk kulitmu.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <div class="icon">♡</div>
+          <h3>Wishlist Tersimpan</h3>
+          <p>Produk favoritmu aman</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🍃</div>
+          <h3>Rekomendasi Personal</h3>
+          <p>Sesuai jenis kulitmu</p>
+        </div>
+        <div class="feature">
+          <div class="icon">👍</div>
+          <h3>Gratis Daftar</h3>
+          <p>Hanya butuh email</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <section class="auth-card" aria-labelledby="auth-title">
+
+      <div class="auth-tabs" role="tablist">
+        <button type="button" class="auth-tab active" id="tab-login" role="tab" aria-selected="true" aria-controls="form-login">Masuk</button>
+        <button type="button" class="auth-tab" id="tab-register" role="tab" aria-selected="false" aria-controls="form-register">Daftar</button>
+      </div>
+
+      <h1 id="auth-title" class="auth-title">Selamat datang kembali</h1>
+      <p class="auth-sub" id="auth-sub">Masuk untuk menyimpan wishlist dan rekomendasi skincare-mu.</p>
+
+      <div class="auth-alert" id="authAlert" role="alert" hidden></div>
+
+      <!-- FORM LOGIN -->
+      <form id="form-login" novalidate>
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="nama@email.com" autocomplete="email" required>
+          <small class="field-error" data-for="login-email"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Kata sandi</label>
+          <div class="pw-field">
+            <input type="password" id="login-password" placeholder="Masukkan kata sandi" autocomplete="current-password" required>
+            <button type="button" class="pw-toggle" data-target="login-password" aria-label="Tampilkan kata sandi">Lihat</button>
+          </div>
+          <small class="field-error" data-for="login-password"></small>
+        </div>
+
+        <label class="remember">
+          <input type="checkbox" id="login-remember"> Ingat saya di perangkat ini
+        </label>
+
+        <button type="submit" class="btn-submit">Masuk</button>
+      </form>
+
+      <!-- FORM DAFTAR -->
+      <form id="form-register" novalidate hidden>
+        <div class="form-group">
+          <label for="reg-name">Nama lengkap</label>
+          <input type="text" id="reg-name" placeholder="Nama kamu" autocomplete="name" required>
+          <small class="field-error" data-for="reg-name"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" placeholder="nama@email.com" autocomplete="email" required>
+          <small class="field-error" data-for="reg-email"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-password">Kata sandi</label>
+          <div class="pw-field">
+            <input type="password" id="reg-password" placeholder="Minimal 6 karakter" autocomplete="new-password" required>
+            <button type="button" class="pw-toggle" data-target="reg-password" aria-label="Tampilkan kata sandi">Lihat</button>
+          </div>
+          <small class="field-error" data-for="reg-password"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-confirm">Ulangi kata sandi</label>
+          <input type="password" id="reg-confirm" placeholder="Ketik ulang kata sandi" autocomplete="new-password" required>
+          <small class="field-error" data-for="reg-confirm"></small>
+        </div>
+
+        <button type="submit" class="btn-submit">Buat akun</button>
+      </form>
+
+    </section>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2>Finally Found You.</h2>
+        <p>Sahabat terbaik untuk perjalanan kulit sehatmu.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Jelajahi</h3>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="catalog.html">Produk</a></li>
+          <li><a href="about.html">Tentang Kami</a></li>
+          <li><a href="contact.html">Kontak</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <div class="footer-bottom">© 2026 Finally Found You. All rights reserved.</div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/login.js"></script>
+
+</body>
+
+
+
+</html>
